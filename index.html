@@ -28,14 +28,15 @@
       <div class="intro">
         <p class="eyebrow">Planungshilfe für die Ausbildung</p>
         <h1>Die nächste Übung gut vorbereiten</h1>
-        <p>Beantworte ein paar Fragen. Daraus entsteht ein übersichtlicher, anpassbarer Übungsvorschlag – ganz ohne Anmeldung.</p>
+        <p>Erstelle einen vollständigen Ablauf mit Aufgaben und Material je Trupp – inklusive zweiseitigem, fiktivem Übungs-Alarmfax, passendem Szenenbild und chronologischer Checkliste als PDF.</p>
       </div>
+      <div class="notice safety-banner"><strong>Nur als kontrolliertes Planspiel</strong>Alle Inhalte vor Durchführung fachlich und örtlich prüfen. Keine realen Gefahren, Einsatzhandlungen, Notrufe, Alarmierungen oder Einsatzkommunikation nachstellen.</div>
 
       <form id="planner-form" novalidate>
         <div class="step-heading">
           <div>
             <p class="eyebrow" id="step-count">Schritt 1 von 4</p>
-            <h2 id="step-title">Material und Rahmen</h2>
+            <h2 id="step-title">Übungsart und Szenario</h2>
           </div>
           <div class="progress-track" role="progressbar" aria-label="Fortschritt im Formular" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1">
             <span id="progress-fill"></span>
@@ -44,12 +45,150 @@
 
         <section class="form-step" data-step="0" aria-labelledby="step-title">
           <div class="field">
-            <label for="materials">1. Welche Geräte und Materialien stehen zur Verfügung? <span class="required-mark">(Pflichtfeld)</span></label>
-            <textarea id="materials" name="materials" rows="3" required aria-describedby="materials-error" placeholder="Zum Beispiel: Fahrzeug, Funkgeräte, Leitkegel, Übungspuppen"></textarea>
-            <small class="field-error" id="materials-error" aria-live="polite"></small>
+            <label for="scenarioId">1. Welches Szenario soll geplant werden? <span class="required-mark">(Pflichtfeld)</span></label>
+            <select id="scenarioId" name="scenarioId" required aria-describedby="scenarioId-error scenario-hint">
+              <option value="">Bitte auswählen</option>
+              <optgroup label="Brand und Rauch">
+                <option value="brand">Brand-/Rauchmeldung am Gebäude (z. B. Wohnung, Keller, Dach, Kleinbrand)</option>
+                <option value="brandmeldeanlage">Ausgelöste Brandmeldeanlage</option>
+                <option value="industriebrand">Brandmeldung im Gewerbe-/Industriebetrieb (z. B. Maschinenhalle)</option>
+                <option value="vegetationsbrand">Vegetations- oder Flächenbrand</option>
+                <option value="fahrzeugbrand">Brand an Pkw oder Lkw</option>
+                <option value="bahnbrand">Rauch-/Brandmeldung an Zug oder Schienenfahrzeug</option>
+              </optgroup>
+              <optgroup label="Verkehr und technische Hilfe">
+                <option value="verkehrsunfall">Verkehrsunfall, z. B. Pkw am Baum</option>
+                <option value="lkwunfall">Verkehrsunfall mit Lkw oder mehreren Fahrzeugen</option>
+                <option value="verkehrslenkung">Verkehrslenkung nach einem Verkehrsunfall (nur Planspiel)</option>
+                <option value="unwetter">Unwetterfolge, z. B. umgestürzter Baum</option>
+                <option value="oelspur">Ölspur, Straßenreinigung oder unklare Fahrbahnverunreinigung</option>
+                <option value="arbeitunfall">Arbeits-/Stromunfall oder technische Hilfeleistung</option>
+                <option value="tueröffnung">Eilige Türöffnung / unklare Lage hinter einer Tür</option>
+              </optgroup>
+              <optgroup label="Wasser und Unwetter">
+                <option value="hochwasser">Hochwasser oder Wasserschaden</option>
+                <option value="strassenueberflutung">Überflutete Straße nach Starkregen</option>
+              </optgroup>
+              <optgroup label="Personen, Tiere und Zusammenarbeit">
+                <option value="gefahrstoff">Unbekannter Stoff- oder Gefahrstoffhinweis</option>
+                <option value="personensuche">Vermisstenmeldung / Personensuche</option>
+                <option value="menschenrettung">Betreuung einer hilfebedürftigen Person</option>
+                <option value="firstresponder">First-Responder-Meldung / Übergabe im Planspiel</option>
+                <option value="rettungsdienst">Unterstützung des Rettungsdienstes / Rollenübergabe</option>
+                <option value="tiernotlage">Tiernotlage</option>
+              </optgroup>
+              <optgroup label="Planung, Technik und Kommunikation">
+                <option value="stromausfall">Stromausfall / technischer Ausfall</option>
+                <option value="wasserplanung">Ressourcen- und Versorgungsplanung</option>
+                <option value="lageerkundung">Unklare Lage und Informationsabgleich</option>
+                <option value="teamkommunikation">Teamkommunikation und Aufgabenverteilung</option>
+                <option value="geraetekunde">Material- und Gerätekunde</option>
+                <option value="ablaufplanung">Ablauf- und Übergabeplanung</option>
+              </optgroup>
+            </select>
+            <small class="field-error" id="scenarioId-error" aria-live="polite"></small>
+            <small class="field-hint" id="scenario-hint">Das sind Übungsthemen, keine offiziellen Alarmstichworte oder Alarmierungsstufen. Die Auswahl orientiert sich auch an veröffentlichten Kühbacher Einsatzmeldungen; konkrete frühere Einsatzlagen werden nicht übernommen.</small>
           </div>
           <div class="field">
-            <label for="mustUse">2. Was soll verwendet werden oder zwingend Teil der Übung sein?</label>
+            <label for="scenarioDetails">Konkrete Szenendetails (optional)</label>
+            <textarea id="scenarioDetails" name="scenarioDetails" rows="2" aria-describedby="scenarioDetails-hint" placeholder="Zum Beispiel: Ein Uhu soll sich in einem Seil über einem Fluss verfangen haben."></textarea>
+            <small class="field-hint" id="scenarioDetails-hint">Wird als unbestätigte Planspiel-Angabe ins Alarmfax übernommen. Das Bild ergänzt nur erkannte Symbole, nicht zwingend jedes Detail. Es besteht aus wiederverwendbaren Vektorsymbolen, nicht aus einem KI-Foto; „Uhu + Seil + Fluss“ hat eine eigene Bildkomposition.</small>
+          </div>
+          <div class="field" id="fire-extent-field" hidden>
+            <label for="fireExtent">Symbolischer Brandumfang (optional)</label>
+            <select id="fireExtent" name="fireExtent" aria-describedby="fire-extent-hint">
+              <option value="">Nicht festgelegt – keine Flammen im Bild ergänzen</option>
+              <option value="small">Klein / örtlich begrenzt (Symbol)</option>
+              <option value="medium">Mittlerer Bildbereich (Symbol)</option>
+              <option value="large">Großer Bildbereich (Symbol)</option>
+            </select>
+            <small class="field-hint" id="fire-extent-hint">Nur eine frei gewählte, fiktive Bildvariante. Sie bestätigt weder Feuer noch tatsächliche Ausdehnung und ist keine Einschätzung oder Handlungsanweisung.</small>
+          </div>
+          <div class="field">
+            <label for="exerciseType">2. Welche Art Übung soll es sein? <span class="required-mark">(Pflichtfeld)</span></label>
+            <select id="exerciseType" name="exerciseType" required aria-describedby="exerciseType-error exercise-type-hint">
+              <option value="">Bitte auswählen</option>
+              <option value="einsatzablauf">Kompletter Einsatzablauf als Planspiel (Alarm bis Abschluss)</option>
+              <option value="theorie">Theorieübung mit passenden Lernquellen</option>
+              <option value="mixed">Gemischt: Theorie und anschließendes Planspiel</option>
+              <option value="kommunikation">Kommunikations- und Zusammenarbeitsübung</option>
+              <option value="material">Material- und Gerätekunde (Theorie)</option>
+            </select>
+            <small class="field-error" id="exerciseType-error" aria-live="polite"></small>
+            <small class="field-hint" id="exercise-type-hint">Auch „Einsatzablauf“ bleibt ein fiktives Planspiel: keine reale Anfahrt, Alarmierung, Funkkommunikation oder Gerätehandlung.</small>
+          </div>
+          <section id="unit-planning-fields" class="unit-planning" aria-label="Einheiten im Planspiel" hidden>
+            <p class="eyebrow">Nur für Einsatzablauf und gemischte Übung</p>
+            <fieldset class="unit-fieldset">
+              <legend>Welche eigenen Feuerwehr-Fahrzeugtypen kommen im Planspiel vor?</legend>
+              <div class="unit-choice-grid">
+                <label><input type="checkbox" name="fireVehicle" value="HLF 10"> HLF 10</label>
+                <label><input type="checkbox" name="fireVehicle" value="HLF 20"> HLF 20</label>
+                <label><input type="checkbox" name="fireVehicle" value="LF 10"> LF 10</label>
+                <label><input type="checkbox" name="fireVehicle" value="LF 20"> LF 20</label>
+                <label><input type="checkbox" name="fireVehicle" value="TSF"> TSF</label>
+                <label><input type="checkbox" name="fireVehicle" value="TSF-W"> TSF-W</label>
+                <label><input type="checkbox" name="fireVehicle" value="RW"> RW</label>
+              </div>
+              <small class="field-hint">Fahrzeugtypen sind keine Aussage zur tatsächlichen Beladung oder Besatzung.</small>
+            </fieldset>
+            <fieldset class="unit-fieldset">
+              <legend>Welche weiteren Feuerwehren werden im Planspiel mitgedacht?</legend>
+              <div class="unit-choice-grid">
+                <label><input type="checkbox" name="countyStation" value="aichach"> Freiwillige Feuerwehr Aichach</label>
+                <label><input type="checkbox" name="countyStation" value="kuehbach"> Freiwillige Feuerwehr Kühbach</label>
+                <label><input type="checkbox" name="countyStation" value="inchenhofen"> Freiwillige Feuerwehr Inchenhofen</label>
+                <label><input type="checkbox" name="countyStation" value="haslangkreit"> Freiwillige Feuerwehr Haslangkreit</label>
+                <label><input type="checkbox" name="countyStation" value="stockensau"> Freiwillige Feuerwehr Stockensau</label>
+                <label><input type="checkbox" name="countyStation" value="schoenbach"> Freiwillige Feuerwehr Ober-/Unterschönbach</label>
+                <label><input type="checkbox" name="countyStation" value="unterbernbach"> Freiwillige Feuerwehr Unterbernbach</label>
+                <label><input type="checkbox" name="countyStation" value="kbi"> Kreisbrandinspektion – KBI</label>
+                <label><input type="checkbox" name="countyStation" value="kbm"> Kreisbrandinspektion – KBM</label>
+              </div>
+              <small class="field-hint">Nur die hinterlegten Fahrzeuge einer ausgewählten Feuerwehr erscheinen darunter. KBI und KBM werden als einzelne Führungsrollen berücksichtigt. Bei einem hinterlegten Einzelfahrzeug wird dieses automatisch übernommen; bei mehreren Fahrzeugen kannst du mehrere auswählen.</small>
+            </fieldset>
+            <div id="county-unit-vehicle-selections" class="county-unit-selections" aria-live="polite"></div>
+            <p class="unit-data-warning"><strong>Unvollständige Kreisdaten:</strong> Eine vollständige aktuelle Fahrzeugliste aller Feuerwehren im Landkreis war in öffentlichen Quellen nicht verifizierbar. Hinterlegt sind Aichach, Inchenhofen sowie Kühbach und dessen Ortsteilwehren; KBI/KBM sind Führungsrollen. <a href="https://www.feuerwehr-aichach.de/feuerwehr/fuhrpark/aktuelle-fahrzeuge.html" target="_blank" rel="noopener noreferrer">Fahrzeuge Aichach</a> · <a href="https://www.markt-kuehbach.de/verzeichnis/index.php?kategorie=22" target="_blank" rel="noopener noreferrer">Feuerwehren Markt Kühbach</a> · <a href="https://www.feuerwehr-kuehbach.de/Einsaetze/einsaetze-2026.html" target="_blank" rel="noopener noreferrer">Einsatzmeldungen Kühbach 2026</a> · <a href="https://www.feuerwehr-kuehbach.de/Einsaetze/einsaetze-2025.html" target="_blank" rel="noopener noreferrer">2025</a> · <a href="https://www.feuerwehr-kuehbach.de/Einsaetze/einsaetze-2024.html" target="_blank" rel="noopener noreferrer">2024</a> · <a href="https://www.feuerwehr-lernbar.bayern/api/media/2783/raw/Teilnehmerunterlage.pdf?version=1" target="_blank" rel="noopener noreferrer">Fahrzeugkunde-Unterlage Feuerwehr-Lernbar Bayern</a>. Für weitere Einheiten bitte bestätigte Angaben ergänzen. Keine echte Alarmierung.</p>
+            <div class="field">
+              <label for="otherCountyUnits">Weitere Feuerwehren im Landkreis (optional)</label>
+              <textarea id="otherCountyUnits" name="otherCountyUnits" rows="3" placeholder="Eine Feuerwehr pro Zeile: Name; Fahrzeug(e); örtliche Besatzung laut bestätigter Angabe"></textarea>
+              <small class="field-hint">Manuell ergänzte Einheiten werden als fiktive Planspielangaben ausgegeben; Funkrufnamen, Fahrzeuge und Besatzungen vor Ort bestätigen.</small>
+            </div>
+            <div class="field">
+              <label for="fireUnitDetails">Lokale Feuerwehrdaten (optional)</label>
+              <textarea id="fireUnitDetails" name="fireUnitDetails" rows="3" placeholder="Eine Zeile pro Fahrzeug: Anzahl; örtlich zugeteilter Funkrufname; Mannschaft; tatsächliche Beladung laut lokalem Inventar"></textarea>
+              <small class="field-hint">Rufnamen und Mannschaftsstärken werden nicht erfunden. Nur vor Ort bestätigte Angaben eintragen; DIN-Musterbeladung ist keine Garantie für das konkrete Fahrzeug. <a href="https://www.dinmedia.de/de" target="_blank" rel="noopener noreferrer">Normen bei DIN Media nachschlagen</a>.</small>
+            </div>
+            <fieldset class="unit-fieldset">
+              <legend>Weitere fiktiv beteiligte Einheiten</legend>
+              <div class="unit-choice-grid">
+                <label><input type="checkbox" name="partnerType" value="Weitere Feuerwehr"> Weitere Feuerwehr</label>
+                <label><input type="checkbox" name="partnerType" value="Rettungsdienst"> Rettungsdienst</label>
+                <label><input type="checkbox" name="partnerType" value="THW"> THW</label>
+                <label><input type="checkbox" name="partnerType" value="Polizei"> Polizei</label>
+                <label><input type="checkbox" name="partnerType" value="Wasserrettung"> Wasserrettung</label>
+                <label><input type="checkbox" name="partnerType" value="Sonstige"> Sonstige</label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="partnerUnitDetails">Fahrzeuge, lokale Rufnamen, Personal und bestätigte Übungsbeladung dieser Einheiten (optional)</label>
+              <textarea id="partnerUnitDetails" name="partnerUnitDetails" rows="3" placeholder="Einheit; Fahrzeugtyp und Anzahl; örtlich zugeteilter Rufname; Personal; lokale Übungsangaben"></textarea>
+            </div>
+            <p class="unit-safety-note">Nur Planspiel-Zuordnung – keine echte Alarmierung oder Einsatzkommunikation. Fahrzeugausstattung, Rufnamen und Besatzungen sind örtlich verschieden; nicht angegebene Daten bleiben offen.</p>
+          </section>
+          <div class="field">
+            <label for="objective">3. Welches Ausbildungsziel soll erreicht werden? <span class="required-mark">(Pflichtfeld)</span></label>
+            <textarea id="objective" name="objective" rows="3" required aria-describedby="objective-error" placeholder="Zum Beispiel: Informationen gemeinsam ordnen und Aufgaben klar abstimmen"></textarea>
+            <small class="field-error" id="objective-error" aria-live="polite"></small>
+          </div>
+          <div class="field">
+            <label for="materials">4. Zusätzliches oder besonderes Übungsmaterial (optional)</label>
+            <textarea id="materials" name="materials" rows="3" aria-describedby="materials-error materials-hint" placeholder="Nur ergänzende oder besondere Übungsmaterialien, je Zeile"></textarea>
+            <small class="field-error" id="materials-error" aria-live="polite"></small>
+            <small class="field-hint" id="materials-hint">Fahrzeug-Normbeladung wird nicht automatisch angenommen; tatsächliche Beladung und Verfügbarkeit vor Ort prüfen. Hier nur ergänzendes oder besonders gewünschtes Übungsmaterial eintragen.</small>
+          </div>
+          <div class="field">
+            <label for="mustUse">5. Was soll zwingend berücksichtigt werden?</label>
             <textarea id="mustUse" name="mustUse" rows="2" aria-describedby="mustUse-error" placeholder="Optional – besondere Geräte, Inhalte oder Schwerpunkte"></textarea>
             <small class="field-error" id="mustUse-error" aria-live="polite"></small>
           </div>
@@ -57,12 +196,22 @@
 
         <section class="form-step" data-step="1" aria-labelledby="step-title" hidden>
           <div class="field">
-            <label for="audience">3. An wen richtet sich die Übung? <span class="required-mark">(Pflichtfeld)</span></label>
+            <label for="audience">6. An wen richtet sich die Übung? <span class="required-mark">(Pflichtfeld)</span></label>
             <input id="audience" name="audience" required aria-describedby="audience-error" placeholder="Zum Beispiel: Gruppe mit gemischtem Ausbildungsstand">
             <small class="field-error" id="audience-error" aria-live="polite"></small>
           </div>
           <div class="field">
-            <label for="location">4. Wo findet die Übung statt? <span class="required-mark">(Pflichtfeld)</span></label>
+            <label for="experienceLevel">7. Welcher Ausbildungsstand ist für die Planung anzunehmen? <span class="required-mark">(Pflichtfeld)</span></label>
+            <select id="experienceLevel" name="experienceLevel" required aria-describedby="experienceLevel-error">
+              <option value="">Bitte auswählen</option>
+              <option value="Einsteigerinnen und Einsteiger">Einsteigerinnen und Einsteiger</option>
+              <option value="Gemischter Ausbildungsstand">Gemischter Ausbildungsstand</option>
+              <option value="Erfahrene Teilnehmende">Erfahrene Teilnehmende</option>
+            </select>
+            <small class="field-error" id="experienceLevel-error" aria-live="polite"></small>
+          </div>
+          <div class="field">
+            <label for="location">8. Wo findet die Übung statt? <span class="required-mark">(Pflichtfeld)</span></label>
             <input id="location" name="location" required aria-describedby="location-error" placeholder="Zum Beispiel: Gerätehaus oder Übungsgelände">
             <small class="field-error" id="location-error" aria-live="polite"></small>
           </div>
@@ -71,22 +220,28 @@
         <section class="form-step" data-step="2" aria-labelledby="step-title" hidden>
           <div class="form-grid">
             <div class="field">
-              <label for="participants">5. Anzahl der Teilnehmenden <span class="required-mark">(Pflichtfeld)</span></label>
+              <label for="participants">9. Anzahl der Teilnehmenden <span class="required-mark">(Pflichtfeld)</span></label>
               <input id="participants" name="participants" type="number" min="1" max="200" required aria-describedby="participants-error" placeholder="Zum Beispiel: 12">
               <small class="field-error" id="participants-error" aria-live="polite"></small>
+              <small class="field-hint" id="participants-hint">Bei ausgewählten Landkreis-Fahrzeugen und Führungsrollen wird ein normtypischer Vollbesetzungs-Richtwert eingetragen. Örtliche Besatzung bitte prüfen; du kannst den Wert anpassen.</small>
             </div>
             <div class="field">
-              <label for="instructors">6. Anzahl der Ausbilderinnen und Ausbilder <span class="required-mark">(Pflichtfeld)</span></label>
+              <label for="groupCount">10. Anzahl der Übungstrupps <span class="required-mark">(Pflichtfeld)</span></label>
+              <input id="groupCount" name="groupCount" type="number" min="1" max="12" required aria-describedby="groupCount-error" placeholder="Zum Beispiel: 3">
+              <small class="field-error" id="groupCount-error" aria-live="polite"></small>
+            </div>
+            <div class="field">
+              <label for="instructors">11. Anzahl der Ausbilderinnen und Ausbilder <span class="required-mark">(Pflichtfeld)</span></label>
               <input id="instructors" name="instructors" type="number" min="1" max="50" required aria-describedby="instructors-error" placeholder="Zum Beispiel: 2">
               <small class="field-error" id="instructors-error" aria-live="polite"></small>
             </div>
             <div class="field">
-              <label for="duration">7. Dauer der Übung in Minuten <span class="required-mark">(Pflichtfeld)</span></label>
+              <label for="duration">12. Dauer der Übung in Minuten <span class="required-mark">(Pflichtfeld)</span></label>
               <input id="duration" name="duration" type="number" min="15" max="480" required aria-describedby="duration-error" placeholder="Zum Beispiel: 90">
               <small class="field-error" id="duration-error" aria-live="polite"></small>
             </div>
             <div class="field">
-              <label for="effort">8. Aufwand für Vorbereitung und Durchführung <span class="required-mark">(Pflichtfeld)</span></label>
+              <label for="effort">13. Aufwand für Vorbereitung und Durchführung <span class="required-mark">(Pflichtfeld)</span></label>
               <select id="effort" name="effort" required aria-describedby="effort-error">
                 <option value="">Bitte auswählen</option>
                 <option value="gering">Gering</option>
@@ -100,12 +255,31 @@
 
         <section class="form-step" data-step="3" aria-labelledby="step-title" hidden>
           <div class="field">
-            <label for="objective">9. Welches Ausbildungsziel soll erreicht werden? <span class="required-mark">(Pflichtfeld)</span></label>
-            <textarea id="objective" name="objective" rows="3" required aria-describedby="objective-error" placeholder="Zum Beispiel: Kommunikation und Aufgabenverteilung im Team üben"></textarea>
-            <small class="field-error" id="objective-error" aria-live="polite"></small>
+            <label for="injectType">14. Welche kontrollierte Lageänderung soll eingespielt werden? <span class="required-mark">(Pflichtfeld)</span></label>
+            <select id="injectType" name="injectType" required aria-describedby="injectType-error">
+              <option value="">Bitte auswählen</option>
+              <option value="missing">Eine wichtige Information fehlt zunächst</option>
+              <option value="conflict">Zwei Informationen widersprechen sich</option>
+              <option value="unavailable">Ein eingeplantes Übungsmaterial ist im Planspiel nicht verfügbar</option>
+              <option value="change">Eine Rahmenbedingung ändert sich</option>
+              <option value="unchanged">Keine Lageänderung – Ausgangslage bleibt unverändert</option>
+            </select>
+            <small class="field-error" id="injectType-error" aria-live="polite"></small>
+          </div>
+          <div class="field parallel-option" id="parallel-incident-option" hidden>
+            <label class="checkbox-label" for="parallelIncidentEnabled">
+              <input id="parallelIncidentEnabled" name="parallelIncidentEnabled" type="checkbox" value="yes">
+              Parallele Einsatzmeldung kommt dazu (optional)
+            </label>
+          </div>
+          <div class="field" id="parallel-incident-details-field" hidden>
+            <label for="parallelIncidentDetails">Was ist die parallele Einsatzmeldung?</label>
+            <textarea id="parallelIncidentDetails" name="parallelIncidentDetails" rows="3" aria-describedby="parallelIncidentDetails-hint parallelIncidentDetails-error" placeholder="Zum Beispiel: Hinter dem ersten Unfall ist ein weiteres Auto verunglückt."></textarea>
+            <small class="field-hint" id="parallelIncidentDetails-hint">Nur deine Beschreibung wird für die zweite Skizze verwendet. Nicht genannte Details werden nicht ergänzt.</small>
+            <small class="field-error" id="parallelIncidentDetails-error" aria-live="polite"></small>
           </div>
           <div class="field">
-            <label for="wishes">10. Besondere Wünsche, Einschränkungen oder Ergänzungen</label>
+            <label for="wishes">15. Besondere Wünsche, Einschränkungen oder Ergänzungen</label>
             <textarea id="wishes" name="wishes" rows="3" aria-describedby="wishes-error" placeholder="Optional – etwa Barrierefreiheit, Wetter oder gewünschte Varianten"></textarea>
             <small class="field-error" id="wishes-error" aria-live="polite"></small>
           </div>
