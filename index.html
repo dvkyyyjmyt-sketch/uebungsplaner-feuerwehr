@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8f1d22">
+  <meta name="description" content="Ein einfacher, kostenloser Feuerwehr-Übungsplaner für den Browser.">
+  <title>Feuerwehr-Übungsplaner</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#planen" aria-label="Feuerwehr-Übungsplaner – Startseite">
+        <span class="brand-mark" aria-hidden="true">FW</span>
+        <span>Feuerwehr-<strong>Übungsplaner</strong></span>
+      </a>
+      <nav aria-label="Hauptnavigation">
+        <button class="nav-link active" type="button" data-view="planen" aria-current="page">Übung planen</button>
+        <button class="nav-link" type="button" data-view="gespeichert">Gespeicherte Übungen</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <section id="view-planen" class="view">
+      <div class="intro">
+        <p class="eyebrow">Planungshilfe für die Ausbildung</p>
+        <h1>Die nächste Übung gut vorbereiten</h1>
+        <p>Beantworte ein paar Fragen. Daraus entsteht ein übersichtlicher, anpassbarer Übungsvorschlag – ganz ohne Anmeldung.</p>
+      </div>
+
+      <form id="planner-form" novalidate>
+        <div class="step-heading">
+          <div>
+            <p class="eyebrow" id="step-count">Schritt 1 von 4</p>
+            <h2 id="step-title">Material und Rahmen</h2>
+          </div>
+          <div class="progress-track" role="progressbar" aria-label="Fortschritt im Formular" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1">
+            <span id="progress-fill"></span>
+          </div>
+        </div>
+
+        <section class="form-step" data-step="0" aria-labelledby="step-title">
+          <div class="field">
+            <label for="materials">1. Welche Geräte und Materialien stehen zur Verfügung? <span class="required-mark">(Pflichtfeld)</span></label>
+            <textarea id="materials" name="materials" rows="3" required aria-describedby="materials-error" placeholder="Zum Beispiel: Fahrzeug, Funkgeräte, Leitkegel, Übungspuppen"></textarea>
+            <small class="field-error" id="materials-error" aria-live="polite"></small>
+          </div>
+          <div class="field">
+            <label for="mustUse">2. Was soll verwendet werden oder zwingend Teil der Übung sein?</label>
+            <textarea id="mustUse" name="mustUse" rows="2" aria-describedby="mustUse-error" placeholder="Optional – besondere Geräte, Inhalte oder Schwerpunkte"></textarea>
+            <small class="field-error" id="mustUse-error" aria-live="polite"></small>
+          </div>
+        </section>
+
+        <section class="form-step" data-step="1" aria-labelledby="step-title" hidden>
+          <div class="field">
+            <label for="audience">3. An wen richtet sich die Übung? <span class="required-mark">(Pflichtfeld)</span></label>
+            <input id="audience" name="audience" required aria-describedby="audience-error" placeholder="Zum Beispiel: Gruppe mit gemischtem Ausbildungsstand">
+            <small class="field-error" id="audience-error" aria-live="polite"></small>
+          </div>
+          <div class="field">
+            <label for="location">4. Wo findet die Übung statt? <span class="required-mark">(Pflichtfeld)</span></label>
+            <input id="location" name="location" required aria-describedby="location-error" placeholder="Zum Beispiel: Gerätehaus oder Übungsgelände">
+            <small class="field-error" id="location-error" aria-live="polite"></small>
+          </div>
+        </section>
+
+        <section class="form-step" data-step="2" aria-labelledby="step-title" hidden>
+          <div class="form-grid">
+            <div class="field">
+              <label for="participants">5. Anzahl der Teilnehmenden <span class="required-mark">(Pflichtfeld)</span></label>
+              <input id="participants" name="participants" type="number" min="1" max="200" required aria-describedby="participants-error" placeholder="Zum Beispiel: 12">
+              <small class="field-error" id="participants-error" aria-live="polite"></small>
+            </div>
+            <div class="field">
+              <label for="instructors">6. Anzahl der Ausbilderinnen und Ausbilder <span class="required-mark">(Pflichtfeld)</span></label>
+              <input id="instructors" name="instructors" type="number" min="1" max="50" required aria-describedby="instructors-error" placeholder="Zum Beispiel: 2">
+              <small class="field-error" id="instructors-error" aria-live="polite"></small>
+            </div>
+            <div class="field">
+              <label for="duration">7. Dauer der Übung in Minuten <span class="required-mark">(Pflichtfeld)</span></label>
+              <input id="duration" name="duration" type="number" min="15" max="480" required aria-describedby="duration-error" placeholder="Zum Beispiel: 90">
+              <small class="field-error" id="duration-error" aria-live="polite"></small>
+            </div>
+            <div class="field">
+              <label for="effort">8. Aufwand für Vorbereitung und Durchführung <span class="required-mark">(Pflichtfeld)</span></label>
+              <select id="effort" name="effort" required aria-describedby="effort-error">
+                <option value="">Bitte auswählen</option>
+                <option value="gering">Gering</option>
+                <option value="mittel">Mittel</option>
+                <option value="hoch">Hoch</option>
+              </select>
+              <small class="field-error" id="effort-error" aria-live="polite"></small>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-step" data-step="3" aria-labelledby="step-title" hidden>
+          <div class="field">
+            <label for="objective">9. Welches Ausbildungsziel soll erreicht werden? <span class="required-mark">(Pflichtfeld)</span></label>
+            <textarea id="objective" name="objective" rows="3" required aria-describedby="objective-error" placeholder="Zum Beispiel: Kommunikation und Aufgabenverteilung im Team üben"></textarea>
+            <small class="field-error" id="objective-error" aria-live="polite"></small>
+          </div>
+          <div class="field">
+            <label for="wishes">10. Besondere Wünsche, Einschränkungen oder Ergänzungen</label>
+            <textarea id="wishes" name="wishes" rows="3" aria-describedby="wishes-error" placeholder="Optional – etwa Barrierefreiheit, Wetter oder gewünschte Varianten"></textarea>
+            <small class="field-error" id="wishes-error" aria-live="polite"></small>
+          </div>
+        </section>
+
+        <div class="form-actions no-print">
+          <button class="button button-secondary" id="back-button" type="button" hidden>Zurück</button>
+          <span class="action-spacer"></span>
+          <button class="button button-primary" id="next-button" type="button">Weiter</button>
+          <button class="button button-primary" id="create-button" type="submit" hidden>Übungsvorschlag erstellen</button>
+        </div>
+      </form>
+
+      <section id="plan-output" class="plan-output" aria-live="polite" aria-atomic="false"></section>
+    </section>
+
+    <section id="view-gespeichert" class="view" hidden>
+      <div class="intro">
+        <p class="eyebrow">Deine Auswahl</p>
+        <h1>Gespeicherte Übungen</h1>
+        <p>Favoriten und Bewertungen bleiben in diesem Browser auf diesem Gerät. Sie werden nicht automatisch synchronisiert.</p>
+      </div>
+      <div id="favorites-list" class="favorites-list"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Der Übungsplaner arbeitet lokal im Browser. Es werden keine Daten an externe Dienste gesendet.</p>
+  </footer>
+</body>
+</html>
