@@ -291,6 +291,11 @@ function updateStarButtons() {
 }
 
 function saveRating(plan) {
+  if (!selectedRating) {
+    document.querySelector("#rating-status").textContent = "Bitte wähle zuerst eine Bewertung von 1 bis 5 Sternen.";
+    document.querySelector(".star-button").focus();
+    return;
+  }
   const ratings = readStorage(STORAGE_KEYS.ratings, []);
   const entry = { id: plan.id, title: plan.title, rating: selectedRating, note: document.querySelector("#rating-note").value.trim(), updatedAt: new Date().toISOString() };
   const index = ratings.findIndex((item) => item.id === plan.id);
@@ -305,7 +310,10 @@ function saveRating(plan) {
   if (favorite) {
     favorite.rating = entry.rating;
     favorite.note = entry.note;
-    writeStorage(STORAGE_KEYS.favorites, favorites);
+    if (!writeStorage(STORAGE_KEYS.favorites, favorites)) {
+      document.querySelector("#rating-status").textContent = "Bewertung gespeichert; die Favoritenliste konnte nicht aktualisiert werden.";
+      return;
+    }
   }
   document.querySelector("#rating-status").textContent = "Bewertung wurde in diesem Browser gespeichert.";
   renderFavorites();
@@ -410,6 +418,11 @@ document.querySelector("#back-button").addEventListener("click", () => {
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   if (!validateStep(currentStep)) return;
+  if (currentStep < steps.length - 1) {
+    setStep(currentStep + 1);
+    steps[currentStep].querySelector("input, textarea, select")?.focus();
+    return;
+  }
   const data = formValues();
   currentPlan = makePlan(data);
   const recent = readStorage(STORAGE_KEYS.recent, []);
