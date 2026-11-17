@@ -128,8 +128,10 @@ form { padding: clamp(20px, 5vw, 34px); }
 .unit-choice-grid input { width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--red); }
 .county-unit-selections { display: grid; gap: 12px; margin: 0 0 20px; }
 .county-unit-card { border: 1px solid var(--line); border-radius: 8px; padding: 14px; background: #fff; }
-.county-unit-card h4 { margin: 0 0 10px; }
-.county-unit-card p { margin: 0; }
+.county-unit-card > summary { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 5px 12px; cursor: pointer; }
+.county-unit-card > summary span { color: var(--muted); font-size: .9rem; }
+.county-unit-card .unit-choice-grid { margin-top: 12px; }
+.county-unit-card .field-hint { display: block; margin-top: 10px; }
 .unit-data-warning { margin: 0 0 20px; border-left: 4px solid #b7791f; padding: 10px 12px; background: #fff9e8; }
 .unit-safety-note { margin: 0; border-left: 4px solid var(--red); padding: 9px 12px; background: var(--soft-red); font-weight: 650; }
 .form-actions { display: flex; align-items: center; gap: 12px; margin-top: 28px; }
@@ -157,7 +159,11 @@ form { padding: clamp(20px, 5vw, 34px); }
 .plan-step strong { display: inline-block; min-width: 68px; color: var(--red-dark); }
 .group-card { margin-top: 12px; border: 1px solid var(--line); border-left: 4px solid var(--red); border-radius: 8px; padding: 15px 17px; background: #fbfcfc; }
 .group-card h4 { margin: 0 0 4px; font-size: 1.04rem; }
+.group-card h5 { margin: 16px 0 6px; font-size: .98rem; }
 .group-card p { margin: 7px 0 0; }
+.group-rotation-list { margin: 6px 0 0; padding-left: 22px; }
+.group-rotation-list li + li { margin-top: 10px; }
+.group-rotation-list .supporting-note { display: inline-block; }
 .group-meta, .supporting-note { color: var(--muted); font-size: .94rem; }
 .inject-card { border: 1px solid #d5b66b; border-radius: 8px; padding: 16px; background: #fff9e8; }
 .inject-card h3 { color: #684d10; }
@@ -225,6 +231,62 @@ form { padding: clamp(20px, 5vw, 34px); }
 .rating-caption { margin-left: 8px; color: var(--muted); }
 .rating-panel .field { margin: 14px 0; }
 .status-message { min-height: 1.4em; margin: 8px 0 0; color: #236239; font-weight: 600; }
+.equipment-planning { margin: 20px 0; border-top: 1px solid var(--line); padding-top: 16px; }
+.equipment-planning > h3 { margin: 0 0 8px; }
+.equipment-caveat { margin: 12px 0; border-left: 4px solid #b7791f; padding: 10px 12px; background: #fff9e8; }
+.equipment-data-actions { display: flex; flex-wrap: wrap; gap: 9px; margin: 12px 0; }
+.equipment-import-button { display: inline-flex; align-items: center; cursor: pointer; }
+.vehicle-equipment-editor { display: grid; gap: 10px; }
+.vehicle-inventory-card, .equipment-category, .equipment-overview-card, .equipment-type-card, .equipment-item-card, .equipment-library-category {
+  border: 1px solid var(--line); border-radius: 8px; padding: 12px; background: #fff;
+}
+.equipment-public-loadout, .public-loadout { margin-top: 10px; border: 1px solid var(--line); border-radius: 7px; padding: 10px 12px; background: #f8fafb; }
+.equipment-public-loadout > summary { cursor: pointer; font-weight: 650; }
+.public-loadout h4 { margin: 0 0 6px; }
+.public-loadout ul { margin: 0; padding-left: 20px; }
+.public-loadout p { margin: 8px 0 0; }
+.vehicle-inventory-card > summary, .equipment-type-card > summary, .equipment-item-card > summary {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; cursor: pointer;
+}
+.vehicle-inventory-card > summary span, .equipment-type-card > summary span, .equipment-item-card > summary span { color: var(--muted); font-size: .9rem; }
+.vehicle-inventory-card > .equipment-caveat { font-size: .9rem; }
+.inventory-source-note { display: block; margin: 12px 0; font-weight: 650; }
+.inventory-source-note input, .inventory-source-note textarea { display: block; width: 100%; margin-top: 5px; border: 1px solid #87939b; border-radius: 6px; padding: 9px 10px; font: inherit; }
+.equipment-category { margin-top: 9px; background: #f8fafb; }
+.equipment-category > summary, .equipment-item-detail > summary { cursor: pointer; font-weight: 700; }
+.equipment-inventory-row { display: grid; grid-template-columns: minmax(170px, 1fr) minmax(200px, 1fr) 100px; gap: 10px; align-items: center; border-top: 1px solid var(--line); padding: 10px 0; }
+.equipment-inventory-row label { display: block; color: var(--muted); font-size: .86rem; }
+.equipment-inventory-row select, .equipment-inventory-row input { display: block; width: 100%; min-height: 40px; margin-top: 3px; border: 1px solid #87939b; border-radius: 6px; padding: 7px; color: var(--ink); background: #fff; }
+.equipment-inventory-row input:disabled { color: #59636a; background: #edf0f2; }
+.equipment-knowledge { margin-top: 10px; border-top: 1px solid var(--line); padding-top: 8px; font-size: .92rem; }
+.equipment-knowledge p { margin: 5px 0; }
+.equipment-source-list { margin: 8px 0 0; padding-left: 20px; }
+.equipment-source-list a { overflow-wrap: anywhere; }
+.equipment-overview-card { margin-top: 14px; background: #f8fafb; }
+.equipment-overview-card h4 { margin: 0 0 7px; }
+.equipment-overview-card h4:not(:first-child) { margin-top: 16px; }
+.equipment-candidate-list { padding-left: 0 !important; list-style: none; }
+.equipment-candidate-list > li + li { margin-top: 7px; }
+.equipment-state { margin-left: 6px; color: var(--muted); font-size: .9rem; font-weight: 500; }
+.equipment-library-search { max-width: 580px; }
+.equipment-library { display: grid; gap: 18px; }
+.equipment-library-section h2 { margin: 0 0 10px; font-size: 1.25rem; }
+.equipment-library-section > p { margin: 0 0 12px; }
+.equipment-library-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; }
+.equipment-library-category { margin-top: 10px; padding: 14px; background: #f8fafb; }
+.equipment-library-category h3 { margin: 0 0 10px; font-size: 1.05rem; }
+.equipment-plan .table-scroll { max-width: 100%; overflow-x: auto; }
+.equipment-plan-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.equipment-plan-table th, .equipment-plan-table td { min-width: 120px; border: 1px solid var(--line); padding: 8px; text-align: left; vertical-align: top; }
+.equipment-plan-table thead th { background: #edf3f6; }
+.equipment-plan-table th[scope="row"] { min-width: 160px; }
+.equipment-conflict { margin-top: 12px !important; border-left: 4px solid #b42318; padding: 9px 12px; background: var(--soft-red); }
+.group-equipment-assignment { margin-top: 14px; border: 1px solid var(--line); border-radius: 7px; padding: 10px 12px; }
+.group-equipment-assignment legend { padding: 0 4px; font-weight: 700; }
+.group-equipment-assignment > p { margin: 0 0 8px; color: var(--muted); font-size: .9rem; }
+.equipment-assignment-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 6px 12px; }
+.equipment-assignment-options label { display: flex; align-items: flex-start; gap: 7px; }
+.equipment-assignment-options input { flex: 0 0 18px; width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--red); }
 
 .favorites-list { display: grid; gap: 14px; }
 .favorite-card { display: flex; align-items: center; justify-content: space-between; gap: 18px; border: 1px solid var(--line); border-radius: 10px; padding: 18px; background: #fff; }
@@ -249,6 +311,8 @@ form { padding: clamp(20px, 5vw, 34px); }
   .scene-comparison { grid-template-columns: 1fr; }
   .fax-hazard-list { grid-template-columns: 1fr; }
   .checklist-role-list { grid-template-columns: 1fr; }
+  .equipment-inventory-row { grid-template-columns: 1fr; }
+  .equipment-state { display: block; margin-left: 0; }
 }
 
 @media print {
@@ -300,8 +364,14 @@ form { padding: clamp(20px, 5vw, 34px); }
     font-size: 10.5pt;
     line-height: 1.48;
   }
-  body.print-theory .theory-section { break-inside: avoid; page-break-inside: avoid; }
+  body.print-theory .theory-header { break-after: avoid-page; page-break-after: avoid; }
+  body.print-theory .theory-section { break-inside: auto; page-break-inside: auto; }
+  body.print-theory .theory-section h3 { break-after: avoid; page-break-after: avoid; }
   body.print-theory .theory-validation { break-inside: avoid; page-break-inside: avoid; }
+  body.print-theory .checklist-table-wrap { overflow: visible; }
+  body.print-theory .checklist-role-table { font-size: 7.5pt; line-height: 1.25; table-layout: fixed; }
+  body.print-theory .checklist-role-table th,
+  body.print-theory .checklist-role-table td { padding: 1.5mm; overflow-wrap: anywhere; }
   body.print-theory .theory-sources a { color: #202a32; text-decoration: underline; }
   body.print-packet .checklist-page { font-size: 9.5pt; line-height: 1.38; }
   body.print-packet .checklist-page h2 { font-size: 19pt; }
