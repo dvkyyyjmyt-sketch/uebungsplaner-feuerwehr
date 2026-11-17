@@ -7,6 +7,7 @@
   <meta name="description" content="Ein einfacher, kostenloser Feuerwehr-Übungsplaner für den Browser.">
   <title>Feuerwehr-Übungsplaner</title>
   <link rel="stylesheet" href="style.css">
+  <script src="equipment-catalog.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -19,6 +20,7 @@
       <nav aria-label="Hauptnavigation">
         <button class="nav-link active" type="button" data-view="planen" aria-current="page">Übung planen</button>
         <button class="nav-link" type="button" data-view="gespeichert">Gespeicherte Übungen</button>
+        <button class="nav-link" type="button" data-view="geraetekunde">Fahrzeug- und Gerätekunde</button>
       </nav>
     </div>
   </header>
@@ -28,7 +30,7 @@
       <div class="intro">
         <p class="eyebrow">Planungshilfe für die Ausbildung</p>
         <h1>Die nächste Übung gut vorbereiten</h1>
-        <p>Erstelle einen vollständigen Ablauf mit Aufgaben und Material je Trupp – inklusive zweiseitigem, fiktivem Übungs-Alarmfax, passendem Szenenbild und chronologischer Checkliste als PDF.</p>
+        <p>Erstelle einen Ablauf mit rotierenden Aufgaben je Gruppe und sieh veröffentlichte Ausstattungsangaben direkt beim ausgewählten Fahrzeug – ohne unbelegte Normbeladung vorauszusetzen.</p>
       </div>
       <div class="notice safety-banner"><strong>Nur als kontrolliertes Planspiel</strong>Alle Inhalte vor Durchführung fachlich und örtlich prüfen. Keine realen Gefahren, Einsatzhandlungen, Notrufe, Alarmierungen oder Einsatzkommunikation nachstellen.</div>
 
@@ -120,20 +122,7 @@
           <section id="unit-planning-fields" class="unit-planning" aria-label="Einheiten im Planspiel" hidden>
             <p class="eyebrow">Nur für Einsatzablauf und gemischte Übung</p>
             <fieldset class="unit-fieldset">
-              <legend>Welche eigenen Feuerwehr-Fahrzeugtypen kommen im Planspiel vor?</legend>
-              <div class="unit-choice-grid">
-                <label><input type="checkbox" name="fireVehicle" value="HLF 10"> HLF 10</label>
-                <label><input type="checkbox" name="fireVehicle" value="HLF 20"> HLF 20</label>
-                <label><input type="checkbox" name="fireVehicle" value="LF 10"> LF 10</label>
-                <label><input type="checkbox" name="fireVehicle" value="LF 20"> LF 20</label>
-                <label><input type="checkbox" name="fireVehicle" value="TSF"> TSF</label>
-                <label><input type="checkbox" name="fireVehicle" value="TSF-W"> TSF-W</label>
-                <label><input type="checkbox" name="fireVehicle" value="RW"> RW</label>
-              </div>
-              <small class="field-hint">Fahrzeugtypen sind keine Aussage zur tatsächlichen Beladung oder Besatzung.</small>
-            </fieldset>
-            <fieldset class="unit-fieldset">
-              <legend>Welche weiteren Feuerwehren werden im Planspiel mitgedacht?</legend>
+              <legend>Welche Feuerwehren werden im Planspiel berücksichtigt?</legend>
               <div class="unit-choice-grid">
                 <label><input type="checkbox" name="countyStation" value="aichach"> Freiwillige Feuerwehr Aichach</label>
                 <label><input type="checkbox" name="countyStation" value="kuehbach"> Freiwillige Feuerwehr Kühbach</label>
@@ -145,9 +134,15 @@
                 <label><input type="checkbox" name="countyStation" value="kbi"> Kreisbrandinspektion – KBI</label>
                 <label><input type="checkbox" name="countyStation" value="kbm"> Kreisbrandinspektion – KBM</label>
               </div>
-              <small class="field-hint">Nur die hinterlegten Fahrzeuge einer ausgewählten Feuerwehr erscheinen darunter. KBI und KBM werden als einzelne Führungsrollen berücksichtigt. Bei einem hinterlegten Einzelfahrzeug wird dieses automatisch übernommen; bei mehreren Fahrzeugen kannst du mehrere auswählen.</small>
+              <small class="field-hint">Wähle zuerst eine Feuerwehr; darunter öffnet sich die Auswahl ihrer hinterlegten Fahrzeuge. KBI und KBM sind einzelne Führungsrollen. Nur ausdrücklich markierte Fahrzeuge werden übernommen.</small>
             </fieldset>
             <div id="county-unit-vehicle-selections" class="county-unit-selections" aria-live="polite"></div>
+            <section id="vehicle-equipment-planning" class="equipment-planning" aria-label="Fahrzeugbeladung und relevante Gerätekunde">
+              <h3>Fahrzeugbeladung und Gerätekunde</h3>
+              <p class="equipment-caveat"><strong>Belegte Fahrzeuglisten statt erfundener Normbeladung:</strong> Veröffentlichtes Aichacher Fahrzeugmaterial wird direkt beim konkreten Fahrzeug angezeigt. Die Angaben können veraltet oder unvollständig sein und sind keine Bestätigung der aktuellen Beladung. Für Fahrzeuge ohne verlässliche öffentliche Einzelliste wird keine Ausstattung angenommen; örtlich bestätigen. Zusätzliches Sondermaterial kannst du unten ergänzen.</p>
+              <div id="vehicle-equipment-editor" class="vehicle-equipment-editor"></div>
+              <div id="selected-equipment-overview" class="selected-equipment-overview" aria-live="polite"></div>
+            </section>
             <p class="unit-data-warning"><strong>Unvollständige Kreisdaten:</strong> Eine vollständige aktuelle Fahrzeugliste aller Feuerwehren im Landkreis war in öffentlichen Quellen nicht verifizierbar. Hinterlegt sind Aichach, Inchenhofen sowie Kühbach und dessen Ortsteilwehren; KBI/KBM sind Führungsrollen. <a href="https://www.feuerwehr-aichach.de/feuerwehr/fuhrpark/aktuelle-fahrzeuge.html" target="_blank" rel="noopener noreferrer">Fahrzeuge Aichach</a> · <a href="https://www.markt-kuehbach.de/verzeichnis/index.php?kategorie=22" target="_blank" rel="noopener noreferrer">Feuerwehren Markt Kühbach</a> · <a href="https://www.feuerwehr-kuehbach.de/Einsaetze/einsaetze-2026.html" target="_blank" rel="noopener noreferrer">Einsatzmeldungen Kühbach 2026</a> · <a href="https://www.feuerwehr-kuehbach.de/Einsaetze/einsaetze-2025.html" target="_blank" rel="noopener noreferrer">2025</a> · <a href="https://www.feuerwehr-kuehbach.de/Einsaetze/einsaetze-2024.html" target="_blank" rel="noopener noreferrer">2024</a> · <a href="https://www.feuerwehr-lernbar.bayern/api/media/2783/raw/Teilnehmerunterlage.pdf?version=1" target="_blank" rel="noopener noreferrer">Fahrzeugkunde-Unterlage Feuerwehr-Lernbar Bayern</a>. Für weitere Einheiten bitte bestätigte Angaben ergänzen. Keine echte Alarmierung.</p>
             <div class="field">
               <label for="otherCountyUnits">Weitere Feuerwehren im Landkreis (optional)</label>
@@ -185,7 +180,7 @@
             <label for="materials">4. Zusätzliches oder besonderes Übungsmaterial (optional)</label>
             <textarea id="materials" name="materials" rows="3" aria-describedby="materials-error materials-hint" placeholder="Nur ergänzende oder besondere Übungsmaterialien, je Zeile"></textarea>
             <small class="field-error" id="materials-error" aria-live="polite"></small>
-            <small class="field-hint" id="materials-hint">Fahrzeug-Normbeladung wird nicht automatisch angenommen; tatsächliche Beladung und Verfügbarkeit vor Ort prüfen. Hier nur ergänzendes oder besonders gewünschtes Übungsmaterial eintragen.</small>
+            <small class="field-hint" id="materials-hint">Veröffentlichte Einzellisten erscheinen automatisch je Fahrzeug, ersetzen aber keine örtliche Prüfung. Hier nur ergänzendes oder besonders gewünschtes Übungsmaterial eintragen. Für die Einspielung „Material nicht verfügbar“ muss mindestens eine Position eingetragen und im letzten Schritt ausgewählt werden.</small>
           </div>
           <div class="field">
             <label for="mustUse">5. Was soll zwingend berücksichtigt werden?</label>
@@ -197,18 +192,18 @@
         <section class="form-step" data-step="1" aria-labelledby="step-title" hidden>
           <div class="field">
             <label for="audience">6. An wen richtet sich die Übung? <span class="required-mark">(Pflichtfeld)</span></label>
-            <input id="audience" name="audience" required aria-describedby="audience-error" placeholder="Zum Beispiel: Gruppe mit gemischtem Ausbildungsstand">
+            <select id="audience" name="audience" required aria-describedby="audience-error audience-hint">
+              <option value="">Bitte auswählen</option>
+              <option value="Jugendfeuerwehr (14–18 Jahre)">Jugendfeuerwehr (14–18 Jahre)</option>
+              <option value="MTA-Ausbildungsgruppe">MTA-Ausbildungsgruppe</option>
+              <option value="Aktive Mannschaft">Aktive Mannschaft</option>
+            </select>
             <small class="field-error" id="audience-error" aria-live="polite"></small>
+            <small class="field-hint" id="audience-hint">Die Wortwahl und der angenommene Ausbildungsstand im Plan richten sich nach dieser Auswahl.</small>
           </div>
           <div class="field">
-            <label for="experienceLevel">7. Welcher Ausbildungsstand ist für die Planung anzunehmen? <span class="required-mark">(Pflichtfeld)</span></label>
-            <select id="experienceLevel" name="experienceLevel" required aria-describedby="experienceLevel-error">
-              <option value="">Bitte auswählen</option>
-              <option value="Einsteigerinnen und Einsteiger">Einsteigerinnen und Einsteiger</option>
-              <option value="Gemischter Ausbildungsstand">Gemischter Ausbildungsstand</option>
-              <option value="Erfahrene Teilnehmende">Erfahrene Teilnehmende</option>
-            </select>
-            <small class="field-error" id="experienceLevel-error" aria-live="polite"></small>
+            <label>7. Ausbildungsniveau</label>
+            <p id="audience-level" class="field-hint">Wird passend zur Zielgruppe automatisch festgelegt.</p>
           </div>
           <div class="field">
             <label for="location">8. Wo findet die Übung statt? <span class="required-mark">(Pflichtfeld)</span></label>
@@ -226,9 +221,17 @@
               <small class="field-hint" id="participants-hint">Bei ausgewählten Landkreis-Fahrzeugen und Führungsrollen wird ein normtypischer Vollbesetzungs-Richtwert eingetragen. Örtliche Besatzung bitte prüfen; du kannst den Wert anpassen.</small>
             </div>
             <div class="field">
-              <label for="groupCount">10. Anzahl der Übungstrupps <span class="required-mark">(Pflichtfeld)</span></label>
-              <input id="groupCount" name="groupCount" type="number" min="1" max="12" required aria-describedby="groupCount-error" placeholder="Zum Beispiel: 3">
-              <small class="field-error" id="groupCount-error" aria-live="polite"></small>
+              <label for="splitGroups">10. Soll die Gruppe für wechselnde Aufgaben aufgeteilt werden? <span class="required-mark">(Pflichtfeld)</span></label>
+              <select id="splitGroups" name="splitGroups" required aria-describedby="split-groups-hint">
+                <option value="no">Nein – alle bearbeiten die Aufgaben gemeinsam</option>
+                <option value="yes">Ja – Gruppen rotieren durch alle Aufgaben</option>
+              </select>
+              <div id="group-count-field" hidden>
+                <label for="groupCount">In wie viele Gruppen soll aufgeteilt werden?</label>
+                <input id="groupCount" name="groupCount" type="number" min="2" max="12" aria-describedby="groupCount-error split-groups-hint" placeholder="Zum Beispiel: 3">
+                <small class="field-error" id="groupCount-error" aria-live="polite"></small>
+              </div>
+              <small class="field-hint" id="split-groups-hint">Bei Aufteilung erhält jede Gruppe dieselben Aufgabenstationen, aber eine andere Startstation. Innerhalb jeder Gruppe werden die Rollen gewechselt, damit alle Aufgaben bearbeitet werden.</small>
             </div>
             <div class="field">
               <label for="instructors">11. Anzahl der Ausbilderinnen und Ausbilder <span class="required-mark">(Pflichtfeld)</span></label>
@@ -265,6 +268,14 @@
               <option value="unchanged">Keine Lageänderung – Ausgangslage bleibt unverändert</option>
             </select>
             <small class="field-error" id="injectType-error" aria-live="polite"></small>
+          </div>
+          <div class="field" id="unavailable-material-field" hidden>
+            <label for="unavailableMaterial">Welches eingetragene Übungsmaterial ist im Planspiel nicht verfügbar? <span class="required-mark">(Pflichtfeld für diese Einspielung)</span></label>
+            <select id="unavailableMaterial" name="unavailableMaterial" aria-describedby="unavailableMaterial-error unavailableMaterial-hint">
+              <option value="">Bitte zuerst ein Material eintragen</option>
+            </select>
+            <small class="field-error" id="unavailableMaterial-error" aria-live="polite"></small>
+            <small class="field-hint" id="unavailableMaterial-hint">Nur die ausgewählte Planspielposition wird als nicht verfügbar markiert. Tatsächliches Übungsmaterial bleibt unberührt.</small>
           </div>
           <div class="field parallel-option" id="parallel-incident-option" hidden>
             <label class="checkbox-label" for="parallelIncidentEnabled">
@@ -303,6 +314,20 @@
         <p>Favoriten und Bewertungen bleiben in diesem Browser auf diesem Gerät. Sie werden nicht automatisch synchronisiert.</p>
       </div>
       <div id="favorites-list" class="favorites-list"></div>
+    </section>
+
+    <section id="view-geraetekunde" class="view" hidden>
+      <div class="intro">
+        <p class="eyebrow">Lokale Daten · nur Theorie</p>
+        <h1>Fahrzeug- und Gerätekunde</h1>
+        <p>Typen, Gerätekategorien und sichere Grundbegriffe. Die Bibliothek behauptet keine tatsächliche Fahrzeugbeladung und ersetzt weder Herstellerunterlagen noch eine qualifizierte Einweisung.</p>
+      </div>
+      <div class="equipment-caveat"><strong>Quellen- und Sicherheitsgrenze:</strong> Öffentlich zugängliche Zusammenfassungen belegen keine vollständige Normbeladung oder Ausstattung eines konkreten Fahrzeugs. DIN Media führt Normen, der Volltext kann zugangsbeschränkt sein. THW-Fahrzeugseiten konnten in dieser Prüfung nicht abgerufen werden. Fehlende Angaben bleiben offen; es werden keine Geräte-Alternativen oder Bedienabläufe erfunden.</div>
+      <div class="field equipment-library-search">
+        <label for="equipment-library-filter">Fahrzeuge, Geräte und Kategorien durchsuchen</label>
+        <input id="equipment-library-filter" type="search" autocomplete="off" placeholder="Zum Beispiel: HLF, Wasserförderung, Funk">
+      </div>
+      <div id="equipment-library" class="equipment-library"></div>
     </section>
   </main>
 

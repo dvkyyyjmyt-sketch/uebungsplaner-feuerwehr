@@ -2,21 +2,24 @@
 const STORAGE_KEYS = {
   recent: "feuerwehr-uebungsplaner-recent",
   favorites: "feuerwehr-uebungsplaner-favorites",
-  ratings: "feuerwehr-uebungsplaner-ratings"
+  ratings: "feuerwehr-uebungsplaner-ratings",
+  vehicleInventories: "feuerwehr-uebungsplaner-vehicle-inventories-v1"
 };
 
 const templates = [
   {
     id: "teamkommunikation",
+    sceneApplicable: false,
     keywords: ["kommunikation", "funk", "führung", "team", "koordination", "information", "rolle", "abstimmung"],
     theme: "Teamkommunikation und klare Aufgabenverteilung",
-    situation: "Bei einer fiktiven Einsatzmeldung treffen mehrere Informationen zeitversetzt ein. Die Gruppe soll gemeinsam ein Lagebild erstellen und ihre nächsten Schritte abstimmen.",
+    situation: "In einer fiktiven Kommunikationsübung tauschen Teilnehmende vorbereitete Text- und Funkmeldungen aus. Es wird kein Einsatzszenario dargestellt.",
     preparation: "Eine kurze, frei erfundene Lagekarte oder schriftliche Meldungen vorbereiten. Arbeitsbereich und Beobachtungsplatz festlegen; keine realen Notrufe oder Funkkanäle verwenden.",
     tasks: ["Informationen ordnen und Rückfragen kenntlich machen.", "Aufgaben und Zuständigkeiten im Team verständlich absprechen.", "Die Entscheidung und offene Punkte für die Nachbesprechung festhalten."],
     variant: "Meldungen in anderer Reihenfolge übermitteln oder eine Information als unklar kennzeichnen."
   },
   {
     id: "geraetekunde",
+    sceneApplicable: false,
     keywords: ["gerät", "material", "technik", "fahrzeug", "ausrüstung"],
     theme: "Gerätekunde mit gemeinsamer Materialplanung",
     situation: "Für ein fiktives Planspiel steht eine begrenzte Liste von Übungsmaterialien bereit. Die Gruppe ordnet nur die Angaben auf der Liste ein und hält fest, was vor einem realen Einsatz fachlich geprüft werden müsste.",
@@ -53,6 +56,7 @@ const templates = [
   },
   {
     id: "wasserplanung",
+    sceneApplicable: false,
     keywords: ["wasser", "versorgung", "schlauch", "lösch", "pumpe"],
     theme: "Ressourcenübersicht und Abstimmung im Planspiel",
     situation: "Anhand einer fiktiven Liste bespricht die Gruppe Ressourcen, Abhängigkeiten und offene Zuständigkeiten. Es wird nichts aufgebaut oder praktisch betrieben.",
@@ -62,6 +66,7 @@ const templates = [
   },
   {
     id: "ablaufplanung",
+    sceneApplicable: false,
     keywords: ["ablauf", "organisation", "planung", "übergabe", "ausbildung"],
     theme: "Ablaufplanung und Rollenwechsel",
     situation: "Die Gruppe erhält einen kurzen Übungsauftrag und entwickelt gemeinsam einen nachvollziehbaren Ablauf mit klaren Rollen und einem vereinbarten Abschluss.",
@@ -259,39 +264,39 @@ const districtFireDepartments = [
     id: "aichach",
     name: "Freiwillige Feuerwehr Aichach",
     vehicles: [
-      { id: "aic-kdow", label: "10/1 – KdoW" },
-      { id: "aic-mzf", label: "11/1 – MZF" },
-      { id: "aic-mtw", label: "14/1 – MTW" },
-      { id: "aic-dlk", label: "30/1 – DLK" },
-      { id: "aic-wlf1", label: "36/1 – WLF" },
-      { id: "aic-wlf2", label: "36/2 – WLF-K" },
-      { id: "aic-teleskoplader", label: "39/1 – Teleskoplader" },
-      { id: "aic-hlf", label: "40/1 – HLF 20", crew: 9 },
-      { id: "aic-lf", label: "40/2 – LF 20/16", crew: 9 },
-      { id: "aic-gw-as", label: "53/1 – GW-AS" },
-      { id: "aic-vlkw", label: "56/1 – V-LKW" },
-      { id: "aic-utv", label: "59/1 – UTV" },
-      { id: "aic-rw", label: "61/1 – RW 2" },
-      { id: "aic-cbrn", label: "66/1 – CBRN-ErkKW" },
-      { id: "aic-dekon", label: "67/1 – Dekon-P" }
+      { id: "aic-kdow", typeId: "kdow", label: "10/1 – KdoW" },
+      { id: "aic-mzf", typeId: "mzf", label: "11/1 – MZF" },
+      { id: "aic-mtw", typeId: "mtw", label: "14/1 – MTW" },
+      { id: "aic-dlk", typeId: "dlk", label: "30/1 – DLK" },
+      { id: "aic-wlf1", typeId: "wlf", label: "36/1 – WLF" },
+      { id: "aic-wlf2", typeId: "wlf-kran", label: "36/2 – WLF-K" },
+      { id: "aic-teleskoplader", typeId: "teleskoplader", label: "39/1 – Teleskoplader" },
+      { id: "aic-hlf", typeId: "hlf-20", label: "40/1 – HLF 20", crew: 9 },
+      { id: "aic-lf", typeId: "lf-20-16", label: "40/2 – LF 20/16", crew: 9 },
+      { id: "aic-gw-as", typeId: "gw-as", label: "53/1 – GW-AS" },
+      { id: "aic-vlkw", typeId: "versorgungs-lkw", label: "56/1 – V-LKW" },
+      { id: "aic-utv", typeId: "utv", label: "59/1 – UTV" },
+      { id: "aic-rw", typeId: "rw-2", label: "61/1 – RW 2" },
+      { id: "aic-cbrn", typeId: "cbrn-erkunder", label: "66/1 – CBRN-ErkKW" },
+      { id: "aic-dekon", typeId: "dekon-p", label: "67/1 – Dekon-P" }
     ]
   },
   {
     id: "kuehbach",
     name: "Freiwillige Feuerwehr Kühbach",
     vehicles: [
-      { id: "kue-hlf", label: "HLF 20/16", crew: 9 },
-      { id: "kue-lf", label: "LF 10 / LF 10 Logistik", crew: 9 },
-      { id: "kue-mzf", label: "MZF" }
+      { id: "kue-hlf", typeId: "hlf-20-16-local", label: "HLF 20/16", crew: 9 },
+      { id: "kue-lf", typeId: "lf-10-logistik", label: "LF 10 / LF 10 Logistik", crew: 9 },
+      { id: "kue-mzf", typeId: "mzf", label: "MZF" }
     ]
   },
   {
     id: "inchenhofen",
     name: "Freiwillige Feuerwehr Inchenhofen",
     vehicles: [
-      { id: "inc-hlf", label: "HLF 20", crew: 9 },
-      { id: "inc-mzf", label: "MZF" },
-      { id: "inc-sfl", label: "49/1 – Sonderlöschfahrzeug" }
+      { id: "inc-hlf", typeId: "hlf-20", label: "HLF 20", crew: 9 },
+      { id: "inc-mzf", typeId: "mzf", label: "MZF" },
+      { id: "inc-sfl", typeId: "sonderloeschfahrzeug", label: "49/1 – Sonderlöschfahrzeug" }
     ]
   },
   ...[
@@ -302,7 +307,7 @@ const districtFireDepartments = [
   ].map(([id, name]) => ({
     id,
     name,
-    vehicles: [{ id: `${id}-tsf`, label: "TSF", crew: 6 }]
+    vehicles: [{ id: `${id}-tsf`, typeId: "tsf", label: "TSF", crew: 6 }]
   })),
   {
     id: "kbi",
@@ -317,6 +322,24 @@ const districtFireDepartments = [
     vehicles: [{ id: "kbm-role", label: "KBM (1 Führungsrolle)", crew: 1 }]
   }
 ];
+
+const audienceProfiles = {
+  "Jugendfeuerwehr (14–18 Jahre)": {
+    experienceLevel: "Altersgerechte Grundlagen; betreutes, vollständig schriftliches Planspiel",
+    guidance: "Für 14- bis 18-Jährige: Aufgaben altersgerecht und gemeinsam mit qualifizierter Aufsicht bearbeiten. Keine eigenständigen Einsatzentscheidungen oder praktischen Einsatzhandlungen.",
+    taskLevel: "Bearbeitet die Aufgabe in einfacher Sprache und gemeinsam mit der qualifizierten Aufsicht; ordnet nur die Textkarten und offenen Fragen, ohne Einsatzhandlungen abzuleiten."
+  },
+  "MTA-Ausbildungsgruppe": {
+    experienceLevel: "Grundausbildung/MTA; Fachbegriffe und Rollenverteilung gemeinsam festigen",
+    guidance: "Grundbegriffe erklären, offene Fragen sichtbar halten und fachliche Entscheidungen durch die Ausbilderinnen und Ausbilder prüfen lassen.",
+    taskLevel: "Verwendet grundlegende Fachbegriffe, erläutert Rückfragen und Rollen; fachliche Aussagen mit den Ausbilderinnen und Ausbildern abgleichen."
+  },
+  "Aktive Mannschaft": {
+    experienceLevel: "Aktive Mannschaft; Vorkenntnisse können unterschiedlich sein",
+    guidance: "Vorwissen abgleichen, Zuständigkeiten und örtliche Verfahren anhand geprüfter Unterlagen besprechen; unterschiedliche Erfahrung berücksichtigen.",
+    taskLevel: "Prüft offene Punkte im Abgleich mit aktuell geltenden örtlichen Verfahren; Erfahrungen begründen und Wissenslücken offen benennen."
+  }
+};
 
 const form = document.querySelector("#planner-form");
 const steps = [...document.querySelectorAll(".form-step")];
@@ -354,9 +377,11 @@ function escapeHTML(value) {
 }
 
 function getFieldMessage(field) {
+  if (field.validity.badInput) return "Bitte gib eine gültige Zahl ein.";
   if (field.validity.valueMissing || (field.required && !field.value.trim())) return "Bitte fülle dieses Pflichtfeld aus.";
   if (field.validity.rangeUnderflow) return `Bitte gib mindestens ${field.min} ein.`;
   if (field.validity.rangeOverflow) return `Bitte gib höchstens ${field.max} ein.`;
+  if (field.validity.stepMismatch) return "Bitte gib eine ganze Zahl ein.";
   if (field.validity.typeMismatch) return "Bitte gib einen gültigen Wert ein.";
   return "";
 }
@@ -374,17 +399,29 @@ function validateStep(index) {
   steps[index].querySelectorAll("input, textarea, select").forEach((field) => {
     if (!showFieldError(field)) valid = false;
   });
-  if (index === 2) {
-    const participants = Number(form.elements.participants.value);
-    const groupCount = Number(form.elements.groupCount.value);
-    if (participants && groupCount && participants < groupCount) {
-      const field = form.elements.groupCount;
-      field.setAttribute("aria-invalid", "true");
-      document.querySelector("#groupCount-error").textContent = "Es muss mindestens eine teilnehmende Person je Übungstrupp geben.";
+  if (index === 3 && form.elements.injectType.value === "unavailable") {
+    const materialField = form.elements.unavailableMaterial;
+    const materialError = document.querySelector("#unavailableMaterial-error");
+    const materialList = String(form.elements.materials.value || "").split(/[,;\n]+/).map((item) => item.trim()).filter(Boolean);
+    if (!materialList.length || !materialList.includes(materialField.value)) {
+      materialField.setAttribute("aria-invalid", "true");
+      materialError.textContent = materialList.length
+        ? "Bitte wähle ein Material aus der Liste."
+        : "Gehe zurück zum ersten Schritt und ergänze mindestens ein Übungsmaterial.";
       valid = false;
     }
   }
-  if (!valid) steps[index].querySelector(":invalid")?.focus();
+  if (index === 2) {
+    const participants = Number(form.elements.participants.value);
+    const groupCount = Number(form.elements.groupCount.value);
+    if (form.elements.splitGroups.value === "yes" && participants && groupCount && participants < groupCount) {
+      const field = form.elements.groupCount;
+      field.setAttribute("aria-invalid", "true");
+      document.querySelector("#groupCount-error").textContent = "Die Zahl der Gruppen darf die Zahl der Teilnehmenden nicht überschreiten.";
+      valid = false;
+    }
+  }
+  if (!valid) (steps[index].querySelector(":invalid") || steps[index].querySelector('[aria-invalid="true"]'))?.focus();
   return valid;
 }
 
@@ -402,14 +439,40 @@ function setStep(index) {
 
 function formValues() {
   const data = new FormData(form);
+  const audience = form.elements.audience.value;
   return {
     ...Object.fromEntries(data.entries()),
-    fireVehicles: [...form.querySelectorAll('input[name="fireVehicle"]:checked')].map((input) => input.value),
+    audience,
+    experienceLevel: (audienceProfiles[audience] || {}).experienceLevel || "",
+    audienceGuidance: (audienceProfiles[audience] || {}).guidance || "",
+    splitGroupsEnabled: form.elements.splitGroups.value === "yes",
+    groupCount: form.elements.splitGroups.value === "yes" ? Number(form.elements.groupCount.value) : 1,
     partnerTypes: [...form.querySelectorAll('input[name="partnerType"]:checked')].map((input) => input.value),
     parallelIncidentEnabled: form.elements.parallelIncidentEnabled.checked,
     countyUnits: getSelectedCountyUnits(),
+    vehicleAssets: getSelectedVehicleAssets(),
     otherCountyUnits: form.elements.otherCountyUnits.value.trim()
   };
+}
+
+function updateAudienceLevel() {
+  const profile = audienceProfiles[form.elements.audience.value];
+  document.querySelector("#audience-level").textContent = profile
+    ? `${profile.experienceLevel}. ${profile.guidance}`
+    : "Wird passend zur Zielgruppe automatisch festgelegt.";
+}
+
+function updateGroupSplitFields() {
+  const enabled = form.elements.splitGroups.value === "yes";
+  const field = document.querySelector("#group-count-field");
+  const input = form.elements.groupCount;
+  field.hidden = !enabled;
+  input.required = enabled;
+  if (!enabled) {
+    input.value = "";
+    input.removeAttribute("aria-invalid");
+    document.querySelector("#groupCount-error").textContent = "";
+  }
 }
 
 function updateParallelIncidentFields() {
@@ -426,9 +489,26 @@ function updateParallelIncidentFields() {
   }
 }
 
+function updateUnavailableMaterialFields() {
+  const field = document.querySelector("#unavailable-material-field");
+  const select = form.elements.unavailableMaterial;
+  const unavailableSelected = form.elements.injectType.value === "unavailable";
+  const currentValue = select.value;
+  const materials = String(form.elements.materials.value || "").split(/[,;\n]+/).map((item) => item.trim()).filter(Boolean);
+  select.replaceChildren(new Option("Bitte auswählen", ""));
+  materials.forEach((material) => select.add(new Option(material, material)));
+  select.required = unavailableSelected;
+  field.hidden = !unavailableSelected;
+  if (materials.includes(currentValue)) select.value = currentValue;
+  else select.value = "";
+  select.removeAttribute("aria-invalid");
+  document.querySelector("#unavailableMaterial-error").textContent = "";
+}
+
 function updateUnitPlanningVisibility() {
   const isOperationalPlanspiel = ["einsatzablauf", "mixed"].includes(form.elements.exerciseType.value);
   document.querySelector("#unit-planning-fields").hidden = !isOperationalPlanspiel;
+  renderVehicleEquipmentEditor();
   updateParticipantEstimate();
 }
 
@@ -445,9 +525,7 @@ function getSelectedCountyUnits() {
   );
   return [...form.querySelectorAll('input[name="countyStation"]:checked')].map((input) => {
     const station = districtFireDepartments.find((item) => item.id === input.value);
-    const vehicles = station.vehicles.length === 1
-      ? station.vehicles
-      : station.vehicles.filter((vehicle) => selectedVehicleIds.has(vehicle.id));
+    const vehicles = station.vehicles.filter((vehicle) => selectedVehicleIds.has(vehicle.id));
     return { id: station.id, name: station.name, vehicles };
   });
 }
@@ -457,19 +535,12 @@ function participantEstimate() {
     return { knownPersonnel: 0, unknownVehicles: [], selectedVehicleCount: 0 };
   }
   const countyVehicles = getSelectedCountyUnits().flatMap((unit) => unit.vehicles);
-  const selectedOwnVehicles = [...form.querySelectorAll('input[name="fireVehicle"]:checked')].map((input) => input.value);
-  const ownVehicleCrews = {
-    "HLF 10": 9, "HLF 20": 9, "LF 10": 9, "LF 20": 9,
-    TSF: 6, "TSF-W": 6, RW: 3
-  };
-  const knownPersonnel = countyVehicles.reduce((total, vehicle) => total + (vehicle.crew || 0), 0)
-    + selectedOwnVehicles.reduce((total, type) => total + (ownVehicleCrews[type] || 0), 0);
+  const knownPersonnel = countyVehicles.reduce((total, vehicle) => total + (vehicle.crew || 0), 0);
   const unknownVehicles = countyVehicles.filter((vehicle) => !vehicle.crew).map((vehicle) => vehicle.label);
-  const unknownOwnVehicles = selectedOwnVehicles.filter((type) => !ownVehicleCrews[type]);
   return {
     knownPersonnel,
-    unknownVehicles: [...unknownVehicles, ...unknownOwnVehicles],
-    selectedVehicleCount: countyVehicles.length + selectedOwnVehicles.length
+    unknownVehicles,
+    selectedVehicleCount: countyVehicles.length
   };
 }
 
@@ -480,13 +551,13 @@ function updateParticipantEstimate() {
   if (!estimate.selectedVehicleCount) {
     if (field.dataset.autoEstimate === "true") field.value = "";
     delete field.dataset.autoEstimate;
-    hint.textContent = "Bei ausgewählten Fahrzeugtypen und Landkreis-Führungsrollen wird ein normtypischer Vollbesetzungs-Richtwert eingetragen. Örtliche Besatzung bitte prüfen; du kannst den Wert anpassen.";
+    hint.textContent = "Bei ausgewählten Fahrzeugen und Führungsrollen wird ein unverbindlicher Vollbesetzungs-Richtwert eingetragen. Örtliche Besatzung bitte prüfen; du kannst den Wert anpassen.";
     return;
   }
   if (estimate.knownPersonnel) {
     field.value = String(estimate.knownPersonnel);
     field.dataset.autoEstimate = "true";
-    hint.textContent = `${estimate.knownPersonnel} Teilnehmende als Richtwert bei normtypischer Vollbesetzung eingetragen${estimate.unknownVehicles.length ? `; für ${estimate.unknownVehicles.join(", ")} ist keine Besatzungszahl hinterlegt` : ""}. Örtliche Besatzungen prüfen; du kannst den Wert anpassen.`;
+    hint.textContent = `${estimate.knownPersonnel} Teilnehmende als unverbindlicher Vollbesetzungs-Richtwert eingetragen${estimate.unknownVehicles.length ? `; für ${estimate.unknownVehicles.join(", ")} ist keine Besatzungszahl hinterlegt` : ""}. Örtliche Besatzungen prüfen; du kannst den Wert anpassen.`;
   } else {
     if (field.dataset.autoEstimate === "true") field.value = "";
     delete field.dataset.autoEstimate;
@@ -504,19 +575,380 @@ function renderCountyUnitVehicleSelections() {
   if (!selectedStations.length) {
     container.innerHTML = "";
     updateParticipantEstimate();
+    renderVehicleEquipmentEditor();
     return;
   }
   container.innerHTML = selectedStations.map((station) => {
     if (station.personnelOnly) {
       return `<section class="county-unit-card"><h4>${escapeHTML(station.name)}</h4><p>Als einzelne Führungsrolle ausgewählt. Für die Teilnehmendenzahl wird eine Person als Richtwert angesetzt; örtlich bestätigen.</p></section>`;
     }
-    if (station.vehicles.length === 1) {
-      const vehicle = station.vehicles[0];
-      return `<section class="county-unit-card"><h4>${escapeHTML(station.name)}</h4><p>Automatisch ausgewähltes Einzelfahrzeug: <strong>${escapeHTML(vehicle.label)}</strong>${vehicle.crew ? ` · normtypische Besatzung: ${vehicle.crew} Personen` : ""}</p></section>`;
-    }
-    return `<section class="county-unit-card"><h4>${escapeHTML(station.name)} – Fahrzeuge fürs Planspiel auswählen</h4><div class="unit-choice-grid">${station.vehicles.map((vehicle) => `<label><input type="checkbox" data-station-vehicle="${escapeHTML(station.id)}" value="${escapeHTML(vehicle.id)}"${selectedVehicleIds.has(vehicle.id) ? " checked" : ""}> ${escapeHTML(vehicle.label)}${vehicle.crew ? ` · ${vehicle.crew} Personen` : ""}</label>`).join("")}</div><small class="field-hint">Bei mehreren Fahrzeugen nur die gewünschten Fahrzeuge markieren. Für Typen ohne normtypische Besatzungsangabe keine Personenzahl ableiten.</small></section>`;
+    const selectedCount = station.vehicles.filter((vehicle) => selectedVehicleIds.has(vehicle.id)).length;
+    return `<details class="county-unit-card" open><summary><strong>${escapeHTML(station.name)}</strong><span>${selectedCount} Fahrzeug(e) ausgewählt</span></summary><div class="unit-choice-grid">${station.vehicles.map((vehicle) => `<label><input type="checkbox" data-station-vehicle="${escapeHTML(station.id)}" value="${escapeHTML(vehicle.id)}"${selectedVehicleIds.has(vehicle.id) ? " checked" : ""}> ${escapeHTML(vehicle.label)}${vehicle.crew ? ` · Richtwert ${vehicle.crew} Personen` : ""}</label>`).join("")}</div><small class="field-hint">Nur die hier markierten Fahrzeuge kommen in den Plan. Bei Fahrzeugen ohne Mannschaftsangabe bleibt die Teilnehmendenzahl offen.</small></details>`;
   }).join("");
   updateParticipantEstimate();
+  renderVehicleEquipmentEditor();
+}
+
+function readVehicleInventories() {
+  const stored = readStorage(STORAGE_KEYS.vehicleInventories, {});
+  return stored && typeof stored === "object" && !Array.isArray(stored) ? stored : {};
+}
+
+function vehicleInventoryFor(key, inventories = readVehicleInventories()) {
+  const stored = inventories[key];
+  if (!stored || typeof stored !== "object" || Array.isArray(stored)) {
+    return { sourceNote: "", vehicleLabel: "", items: {} };
+  }
+  return {
+    sourceNote: typeof stored.sourceNote === "string" ? stored.sourceNote : "",
+    vehicleLabel: typeof stored.vehicleLabel === "string" ? stored.vehicleLabel.slice(0, 100) : "",
+    items: stored.items && typeof stored.items === "object" && !Array.isArray(stored.items) ? stored.items : {}
+  };
+}
+
+function getSelectedVehicleAssets() {
+  if (!["einsatzablauf", "mixed"].includes(form.elements.exerciseType.value)) return [];
+  const inventories = readVehicleInventories();
+  const assets = [];
+  getSelectedCountyUnits().forEach((unit) => {
+    const station = districtFireDepartments.find((item) => item.id === unit.id);
+    if (!station || station.personnelOnly) return;
+    unit.vehicles.forEach((vehicle) => {
+      if (!vehicle.typeId) return;
+      assets.push({
+        key: `station:${unit.id}:${vehicle.id}`,
+        typeId: vehicle.typeId,
+        label: `${unit.name} · ${vehicle.label}`,
+        publishedLoadout: publishedVehicleLoadouts[vehicle.id] || null
+      });
+    });
+  });
+  return assets.map((asset) => {
+    const inventory = vehicleInventoryFor(asset.key, inventories);
+    return {
+      ...asset,
+      label: inventory.vehicleLabel || asset.label,
+      inventory,
+      publishedLoadout: asset.publishedLoadout
+    };
+  });
+}
+
+function equipmentItemById(id) {
+  return equipmentCatalog.find((item) => item.id === id);
+}
+
+function equipmentCategoryById(id) {
+  return equipmentCategories.find((category) => category.id === id);
+}
+
+function equipmentSearchUrl(item) {
+  return `https://www.feuerwehr-lernbar.bayern/search?search=${encodeURIComponent(item.name)}`;
+}
+
+function equipmentKnowledgeHTML(item) {
+  const category = equipmentCategoryById(item.category);
+  return `<div class="equipment-knowledge">
+    <p><strong>Kategorie:</strong> ${escapeHTML(category ? category.name : "Nicht zugeordnet")}</p>
+    <p><strong>Allgemeiner Zweck:</strong> ${escapeHTML(item.purpose)}</p>
+    <p><strong>Grundprinzip:</strong> ${escapeHTML(item.principle)}</p>
+    <p><strong>Wesentliche Risiken:</strong> ${escapeHTML(item.risks)}</p>
+    <p><strong>Grenzen:</strong> ${escapeHTML(item.limit)}</p>
+    <p><strong>Qualifikation:</strong> Maßgeblich sind das konkrete Gerät, aktuelle Herstellerinformationen, qualifizierte Ausbildung und örtliche Freigabe. Hier wird keine Bedienung angeleitet.</p>
+    <p><strong>Hersteller/Modell:</strong> Nicht festgelegt; Eigenschaften sind geräte- und herstellerabhängig.</p>
+    <p><strong>Quellenstatus:</strong> Allgemeine Theorieübersicht, kein geräte- oder fahrzeugbezogener Beladungsnachweis.</p>
+    <ul class="equipment-source-list">
+      <li><a href="${escapeHTML(equipmentSearchUrl(item))}" target="_blank" rel="noopener noreferrer">Themenrecherche Feuerwehr-Lernbar (dynamische Suche)</a></li>
+      <li><a href="${escapeHTML(equipmentSources.find((source) => source.id === "fire-schools").url)}" target="_blank" rel="noopener noreferrer">Staatliche Feuerwehrschulen Bayern</a></li>
+    </ul>
+  </div>`;
+}
+
+function renderEquipmentLibrary(searchText = "") {
+  const container = document.querySelector("#equipment-library");
+  if (!container) return;
+  const term = String(searchText || "").trim().toLocaleLowerCase("de");
+  const matches = (values) => !term || values.some((value) => String(value || "").toLocaleLowerCase("de").includes(term));
+  const vehicles = vehicleTypeCatalog.filter((vehicle) => matches([vehicle.name, vehicle.category, vehicle.designation]));
+  const categories = equipmentCategories.map((category) => ({
+    ...category,
+    items: equipmentCatalog.filter((item) => item.category === category.id
+      && matches([item.name, item.purpose, item.principle, category.name]))
+  })).filter((category) => category.items.length);
+  const organizations = equipmentOrganizations.filter((organization) => matches([organization.name, organization.note]));
+  const vehicleHTML = vehicles.map((vehicle) => {
+    const listedVehicles = districtFireDepartments.flatMap((station) => station.vehicles
+      .filter((entry) => entry.typeId === vehicle.id && publishedVehicleLoadouts[entry.id])
+      .map((entry) => ({ ...entry, station, loadout: publishedVehicleLoadouts[entry.id] })));
+    const listedHTML = listedVehicles.map((entry) => `<details class="equipment-public-loadout">
+      <summary>${escapeHTML(entry.station.name)} · ${escapeHTML(entry.label)}</summary>
+      <ul>${entry.loadout.items.map((item) => `<li>${escapeHTML(item)}</li>`).join("")}</ul>
+      <a href="${escapeHTML(entry.loadout.sourceUrl)}" target="_blank" rel="noopener noreferrer">Öffentliche Einzelliste öffnen</a>
+    </details>`).join("");
+    return `<details class="equipment-type-card">
+    <summary><strong>${escapeHTML(vehicle.name)}</strong><span>${escapeHTML(vehicle.category)}</span></summary>
+    <p>${escapeHTML(vehicle.designation)}</p>
+    ${listedHTML ? `<p><strong>Veröffentlichte Einzellisten:</strong> fahrzeugbezogene Angaben, nicht auf andere Fahrzeuge dieses Typs übertragbar.</p>${listedHTML}` : "<p><strong>Beladungsstatus:</strong> Keine verifizierte Einzelliste hinterlegt. Keine typbezogene Beladung oder Eignung ableiten.</p>"}
+    <ul class="equipment-source-list">
+      <li><a href="${escapeHTML(equipmentSources.find((source) => source.id === "vehicle-handout").url)}" target="_blank" rel="noopener noreferrer">Fahrzeugkunde-Unterlage Feuerwehr-Lernbar Bayern</a></li>
+      <li><a href="${escapeHTML(equipmentSources.find((source) => source.id === "din-media").url)}" target="_blank" rel="noopener noreferrer">DIN Media (Normenrecherche; vollständiger Text nicht automatisch zugänglich)</a></li>
+    </ul>
+  </details>`;
+  }).join("");
+  const categoryHTML = categories.map((category) => `<section class="equipment-library-category">
+    <h3>${escapeHTML(category.name)}</h3>
+    <div class="equipment-library-grid">${category.items.map((item) => `<details class="equipment-item-card">
+      <summary><strong>${escapeHTML(item.name)}</strong><span>${escapeHTML(category.name)}</span></summary>
+      ${equipmentKnowledgeHTML(item)}
+    </details>`).join("")}</div>
+  </section>`).join("");
+  const sourcesHTML = equipmentSources.map((source) => `<li><a href="${escapeHTML(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(source.name)}</a> — ${escapeHTML(source.description)}</li>`).join("");
+  const organizationsHTML = organizations.map((organization) => `<li><strong>${escapeHTML(organization.name)}:</strong> ${escapeHTML(organization.note || "Keine fahrzeug- oder standortbezogene Beladung hinterlegt.")}</li>`).join("");
+  container.innerHTML = `${vehicles.length ? `<section class="equipment-library-section"><h2>Fahrzeugtypen und Varianten</h2><p>Bezeichnungen sind Such- und Sortierhilfen. Aktuelle/historische Klassifikation sowie örtliche Ausführung vor Nutzung prüfen.</p><div class="equipment-library-grid">${vehicleHTML}</div></section>` : ""}
+    ${categoryHTML ? `<section class="equipment-library-section"><h2>Gerätewissen nach Kategorie</h2>${categoryHTML}</section>` : ""}
+    ${organizationsHTML ? `<section class="equipment-library-section"><h2>Organisationen und Datenlücken</h2><ul>${organizationsHTML}</ul></section>` : ""}
+    <section class="equipment-library-section"><h2>Quellen und Verifizierungsgrenzen</h2><ul>${sourcesHTML}</ul><p>Die Katalogtexte sind eine theoretische Orientierung. Die verlinkten Aichacher Einzellisten sind öffentliche örtliche Angaben, keine aktuellen Inventarnachweise oder Normbeladungen. Für andere Fahrzeuge wurden keine vollständigen örtlichen Beladungsverzeichnisse verifiziert. Konkrete Daten vor der Ausbildung mit den zuständigen Unterlagen und Verantwortlichen abgleichen.</p></section>
+    ${!vehicles.length && !categoryHTML && !organizationsHTML ? "<p>Keine passenden Einträge gefunden.</p>" : ""}`;
+}
+
+function renderVehicleEquipmentEditor() {
+  const container = document.querySelector("#vehicle-equipment-editor");
+  if (!container) return;
+  const assets = getSelectedVehicleAssets();
+  if (!assets.length) {
+    container.innerHTML = '<p class="supporting-note">Wähle eine Feuerwehr und darunter mindestens ein Fahrzeug, damit veröffentlichte fahrzeugbezogene Angaben erscheinen. Für nicht belegte Fahrzeuge wird keine Beladung angenommen.</p>';
+    renderSelectedEquipmentOverview();
+    return;
+  }
+  container.innerHTML = assets.map((asset) => {
+    const type = vehicleTypeCatalog.find((item) => item.id === asset.typeId);
+    const loadout = asset.publishedLoadout;
+    return `<details class="vehicle-inventory-card">
+      <summary><strong>${escapeHTML(asset.label)}</strong><span>${escapeHTML(type ? type.designation : "Fahrzeugtyp nicht verifiziert")}</span></summary>
+      ${loadout
+        ? `<p class="supporting-note">Öffentlich gelistete Ausstattung für genau dieses Fahrzeug; keine aktuelle Bestands- oder Einsatzfreigabe. Vor der Übung örtlich abgleichen.</p><ul>${loadout.items.map((item) => `<li>${escapeHTML(item)}</li>`).join("")}</ul><p><a href="${escapeHTML(loadout.sourceUrl)}" target="_blank" rel="noopener noreferrer">Veröffentlichte Fahrzeugangaben öffnen</a></p>`
+        : `<p class="equipment-caveat">Für dieses konkrete Fahrzeug liegt hier keine verlässliche öffentliche Beladeliste vor. Aus der Typbezeichnung wird keine Ausstattung abgeleitet. Tatsächliche Beladung vor Ort anhand der Fahrzeugunterlagen prüfen.</p>`}
+    </details>`;
+  }).join("");
+  renderSelectedEquipmentOverview();
+}
+
+function relevantEquipmentFor(templateId, objective) {
+  const scenarioTags = new Set(scenarioEquipmentTags[templateId] || []);
+  const normalizedObjective = String(objective || "").toLocaleLowerCase("de");
+  return equipmentCatalog.filter((item) => item.tags.some((tag) => scenarioTags.has(tag))
+    || item.name.toLocaleLowerCase("de").split(/[^a-z0-9äöüß]+/).filter((word) => word.length > 3).some((word) => normalizedObjective.includes(word)));
+}
+
+function createEquipmentPlan(templateId, objective, vehicleAssets) {
+  const assets = Array.isArray(vehicleAssets) ? vehicleAssets : [];
+  const items = relevantEquipmentFor(templateId, objective).map((item) => {
+    const present = [];
+    const absent = [];
+    const unknown = [];
+    const listed = [];
+    assets.forEach((asset) => {
+      const record = asset.inventory && asset.inventory.items ? asset.inventory.items[item.id] : null;
+      const publiclyListed = asset.publishedLoadout && asset.publishedLoadout.equipmentIds
+        && asset.publishedLoadout.equipmentIds.includes(item.id);
+      if (publiclyListed) {
+        listed.push(asset.label);
+      }
+      if (record && record.status === "present") {
+        const quantity = Number.isInteger(record.quantity) && record.quantity > 0 ? Math.min(record.quantity, 99) : 1;
+        for (let index = 0; index < quantity; index += 1) {
+          present.push({
+            id: `${asset.key}|${item.id}|${index + 1}`,
+            vehicleKey: asset.key,
+            vehicleLabel: asset.label,
+            quantityNumber: index + 1
+          });
+        }
+      } else if (record && record.status === "absent") {
+        absent.push(asset.label);
+      } else if (!publiclyListed) {
+        unknown.push(asset.label);
+      }
+    });
+    return {
+      equipmentId: item.id,
+      name: item.name,
+      category: item.category,
+      present,
+      absent,
+      unknown,
+      listed,
+      status: present.length
+        ? `Örtlich bestätigt vorhanden: ${present.length}`
+        : assets.length && absent.length === assets.length
+          ? "Örtlich als nicht vorhanden bestätigt"
+          : listed.length
+            ? "Öffentlich gelistet; örtlich zu bestätigen"
+          : assets.length
+            ? "Nicht bestätigt"
+            : "Keine Fahrzeugdaten ausgewählt"
+    };
+  });
+  return {
+    version: 1,
+    source: "Nur lokale Bestandsangaben; keine automatische Normbeladung",
+    candidateNote: "Themenbezogene Kataloghinweise, keine verbindliche Materialanforderung.",
+    vehicleAssets: assets,
+    items,
+    assignments: {}
+  };
+}
+
+function renderSelectedEquipmentOverview() {
+  const container = document.querySelector("#selected-equipment-overview");
+  if (!container) return;
+  const assets = getSelectedVehicleAssets();
+  const templateId = form.elements.scenarioId.value;
+  const candidates = relevantEquipmentFor(templateId, form.elements.objective.value);
+  const confirmed = assets.flatMap((asset) => equipmentCatalog.flatMap((item) => {
+    const record = asset.inventory.items[item.id];
+    return record && record.status === "present"
+      ? [{ name: item.name, vehicle: asset.label, quantity: Number(record.quantity) || 1 }]
+      : [];
+  }));
+  const candidateRows = candidates.map((item) => {
+    const planItem = createEquipmentPlan(templateId, form.elements.objective.value, assets).items.find((entry) => entry.equipmentId === item.id);
+    const availability = planItem.present.length
+      ? `${planItem.status} · ${planItem.present.map((entry) => entry.vehicleLabel).join(", ")}`
+      : planItem.status;
+    return `<li><details class="equipment-item-detail"><summary>${escapeHTML(item.name)} <span class="equipment-state">${escapeHTML(availability)}</span></summary>${equipmentKnowledgeHTML(item)}</details></li>`;
+  }).join("");
+  const publicLists = assets.filter((asset) => asset.publishedLoadout).map((asset) =>
+    `<li><strong>${escapeHTML(asset.label)}:</strong> öffentlich gelistet (${asset.publishedLoadout.items.length} Positionen) · <a href="${escapeHTML(asset.publishedLoadout.sourceUrl)}" target="_blank" rel="noopener noreferrer">Quelle</a></li>`
+  );
+  container.innerHTML = `<section class="equipment-overview-card">
+    <h4>Öffentliche Ausstattung der ausgewählten Fahrzeuge</h4>
+    ${publicLists.length ? `<ul>${publicLists.join("")}</ul>` : "<p>Für die ausgewählten Fahrzeuge ist keine öffentliche Einzelliste hinterlegt. Die Fahrzeugausstattung bleibt offen.</p>"}
+    <h4>Örtlich bestätigte Geräte</h4>
+    ${confirmed.length
+      ? `<ul>${confirmed.map((entry) => `<li>${escapeHTML(entry.name)}${entry.quantity > 1 ? ` · ${escapeHTML(entry.quantity)} Stück` : ""} — ${escapeHTML(entry.vehicle)}</li>`).join("")}</ul>`
+      : "<p>Keine Bestände örtlich bestätigt. Öffentlich gelistete Ausstattung steht oben je Fahrzeug und muss vor Verwendung abgeglichen werden.</p>"}
+    <h4>Für Szenario und Lernziel thematisch relevante Geräte</h4>
+    <p>Nur Suchhinweise zur fachlichen Prüfung, keine Sollbeladung. Nicht bestätigte Angaben bleiben unbekannt; es werden keine Alternativen oder Gerätekombinationen vorgeschlagen.</p>
+    ${candidateRows ? `<ul class="equipment-candidate-list">${candidateRows}</ul>` : "<p>Zu diesem Thema ist kein automatischer Kataloghinweis hinterlegt.</p>"}
+  </section>`;
+}
+
+function saveEquipmentInventoryField(field) {
+  const key = field.dataset.inventoryKey;
+  const equipmentId = field.dataset.equipmentId;
+  const inventories = readVehicleInventories();
+  const inventory = vehicleInventoryFor(key, inventories);
+  if (field.hasAttribute("data-inventory-label")) {
+    inventory.vehicleLabel = field.value.trim().slice(0, 100);
+  } else if (field.hasAttribute("data-inventory-note")) {
+    inventory.sourceNote = field.value.trim().slice(0, 1000);
+  } else {
+    const item = equipmentItemById(equipmentId);
+    if (!item) return;
+    const stored = inventory.items[equipmentId];
+    const current = stored && typeof stored === "object" && !Array.isArray(stored)
+      ? { ...stored }
+      : { status: "unknown", quantity: 1 };
+    if (field.hasAttribute("data-inventory-status")) {
+      current.status = ["present", "absent"].includes(field.value) ? field.value : "unknown";
+      if (current.status === "present" && (!Number.isInteger(current.quantity) || current.quantity < 1)) current.quantity = 1;
+    } else if (field.hasAttribute("data-inventory-quantity")) {
+      const quantity = Number(field.value);
+      if (!Number.isInteger(quantity) || quantity < 1 || quantity > 99) {
+        document.querySelector("#equipment-data-status").textContent = "Die Anzahl muss eine ganze Zahl zwischen 1 und 99 sein.";
+        field.focus();
+        return;
+      }
+      current.quantity = quantity;
+    }
+    inventory.items[equipmentId] = current;
+  }
+  inventories[key] = inventory;
+  if (!writeStorage(STORAGE_KEYS.vehicleInventories, inventories)) {
+    document.querySelector("#equipment-data-status").textContent = "Die lokale Beladung konnte nicht gespeichert werden. Prüfe die Browser-Speichereinstellungen.";
+    return;
+  }
+  document.querySelector("#equipment-data-status").textContent = "Örtliche Inventarangabe lokal gespeichert. Sie ist kein Normnachweis.";
+  if (field.hasAttribute("data-inventory-status")) {
+    const quantity = document.querySelector(`[data-inventory-quantity][data-inventory-key="${CSS.escape(key)}"][data-equipment-id="${CSS.escape(equipmentId)}"]`);
+    if (quantity) quantity.disabled = field.value !== "present";
+  }
+  renderSelectedEquipmentOverview();
+}
+
+function validateInventoryImport(payload) {
+  if (!payload || payload.schema !== "feuerwehr-vehicle-inventories" || payload.version !== 1
+    || !payload.inventories || typeof payload.inventories !== "object" || Array.isArray(payload.inventories)) {
+    throw new Error("Datei ist kein unterstützter Beladungsdaten-Export.");
+  }
+  const validIds = new Set(equipmentCatalog.map((item) => item.id));
+  const result = Object.create(null);
+  Object.entries(payload.inventories).forEach(([key, value]) => {
+    if (!key || key.length > 200 || !value || typeof value !== "object" || Array.isArray(value)) {
+      throw new Error("Eine Fahrzeug- oder Inventarzeile ist ungültig.");
+    }
+    const items = value.items && typeof value.items === "object" && !Array.isArray(value.items) ? value.items : {};
+    const cleanItems = {};
+    Object.entries(items).forEach(([id, record]) => {
+      if (!validIds.has(id) || !record || !["unknown", "present", "absent"].includes(record.status)) {
+        throw new Error("Die Datei enthält eine unbekannte Geräte-ID oder einen ungültigen Status.");
+      }
+      const quantity = Number(record.quantity || 1);
+      if (!Number.isInteger(quantity) || quantity < 1 || quantity > 99) {
+        throw new Error("Eine Geräteanzahl muss eine ganze Zahl zwischen 1 und 99 sein.");
+      }
+      cleanItems[id] = { status: record.status, quantity };
+    });
+    result[key] = {
+      sourceNote: typeof value.sourceNote === "string" ? value.sourceNote.slice(0, 1000) : "",
+      vehicleLabel: typeof value.vehicleLabel === "string" ? value.vehicleLabel.slice(0, 100) : "",
+      items: cleanItems
+    };
+  });
+  return result;
+}
+
+function vehicleInventoryExport() {
+  return {
+    schema: "feuerwehr-vehicle-inventories",
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    inventories: readVehicleInventories()
+  };
+}
+
+function exportVehicleInventories() {
+  const payload = vehicleInventoryExport();
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "feuerwehr-fahrzeugbeladungen.json";
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 0);
+  document.querySelector("#equipment-data-status").textContent = "Beladungsdaten wurden als JSON-Datei exportiert. Datei enthält nur lokale Inventareinträge.";
+}
+
+function importVehicleInventories(file) {
+  const reader = new FileReader();
+  reader.addEventListener("load", () => {
+    try {
+      const imported = validateInventoryImport(JSON.parse(String(reader.result || "")));
+      const merged = { ...readVehicleInventories(), ...imported };
+      if (!writeStorage(STORAGE_KEYS.vehicleInventories, merged)) {
+        throw new Error("Import konnte nicht lokal gespeichert werden.");
+      }
+      document.querySelector("#equipment-data-status").textContent = "Beladungsdaten importiert und mit vorhandenen lokalen Einträgen zusammengeführt.";
+      renderVehicleEquipmentEditor();
+    } catch (error) {
+      document.querySelector("#equipment-data-status").textContent = error.message || "Die Datei konnte nicht importiert werden.";
+    }
+  });
+  reader.addEventListener("error", () => {
+    document.querySelector("#equipment-data-status").textContent = "Die ausgewählte Datei konnte nicht gelesen werden.";
+  });
+  reader.readAsText(file);
 }
 
 const scenarioSizeLevels = [
@@ -634,14 +1066,13 @@ function makePlan(data) {
   const repeatCount = recent.includes(template.id) ? 1 : 0;
   const unitPlanningEnabled = ["einsatzablauf", "mixed"].includes(data.exerciseType);
   const countyUnits = unitPlanningEnabled ? data.countyUnits || [] : [];
-  const fireVehicles = unitPlanningEnabled ? data.fireVehicles || [] : [];
+  const fireVehicles = [];
   const partnerTypes = unitPlanningEnabled ? data.partnerTypes || [] : [];
-  const selectedCountyUnitCount = countyUnits.reduce((total, unit) => total + Math.max(unit.vehicles.length, 1), 0);
+  const selectedCountyUnitCount = countyUnits.reduce((total, unit) => total + unit.vehicles.length, 0);
   const manuallyListedUnitCount = unitPlanningEnabled
     ? String(data.otherCountyUnits || "").split(/\n+/).filter((line) => line.trim()).length
     : 0;
-  const selectedUnitCount = selectedCountyUnitCount + fireVehicles.length
-    + partnerTypes.length + manuallyListedUnitCount;
+  const selectedUnitCount = selectedCountyUnitCount + partnerTypes.length + manuallyListedUnitCount;
   const scenarioSize = scenarioSizeFor(selectedUnitCount);
   const total = Number(data.duration);
   const shares = [0.12, 0.18, 0.5, 0.12, 0.08];
@@ -652,8 +1083,11 @@ function makePlan(data) {
     .sort((left, right) => right.fraction - left.fraction);
   for (let index = 0; index < remainder; index += 1) segments[fractionalOrder[index].index] += 1;
   const equipment = String(data.materials || "").split(/[,;\n]+/).map((item) => item.trim()).filter(Boolean);
+  const vehicleAssets = unitPlanningEnabled ? data.vehicleAssets || [] : [];
+  const publicVehicleAssets = vehicleAssets.filter((asset) => asset.publishedLoadout);
+  const equipmentPlan = createEquipmentPlan(template.id, data.objective, vehicleAssets);
   const participants = Number(data.participants);
-  const groupCount = Number(data.groupCount);
+  const groupCount = data.splitGroupsEnabled ? Number(data.groupCount) : 1;
   const peoplePerGroup = Array.from({ length: groupCount }, (_, index) =>
     Math.floor(participants / groupCount) + (index < participants % groupCount ? 1 : 0)
   );
@@ -670,7 +1104,7 @@ function makePlan(data) {
     },
     {
       title: "Material und Abhängigkeiten",
-      task: "Gleicht die optional ergänzte Materialliste mit dem Ausbildungsziel ab. Wenn keine Sondermaterialien eingetragen sind, bleibt die Materialplanung offen; leitet aus Fahrzeugtypen keine tatsächliche Beladung oder Einsatztauglichkeit ab.",
+      task: "Gleicht ergänzendes Übungsmaterial mit dem Ausbildungsziel ab. Fahrzeugangaben nur dem konkret bezeichneten Fahrzeug zuordnen und unbestätigte Verfügbarkeit oder Eignung offenlassen.",
       output: "Materialübersicht mit Zuordnung, Abhängigkeiten und Klärungsbedarf."
     },
     {
@@ -690,24 +1124,43 @@ function makePlan(data) {
     }
   ];
   const groups = peoplePerGroup.map((people, index) => {
-    const role = groupRoles[index % groupRoles.length];
-    const scenarioTask = template.tasks[index % template.tasks.length];
-    const assignedEquipment = equipment.filter((_, equipmentIndex) => equipmentIndex % groupCount === index);
-    const coordinationTask = scenarioSize.workstreams[index % scenarioSize.workstreams.length];
+    const profile = audienceProfiles[data.audience] || {};
+    const rotationSteps = Array.from({ length: groupRoles.length }, (_, rotationIndex) => {
+      const roleIndex = (rotationIndex + index) % groupRoles.length;
+      const role = groupRoles[roleIndex];
+      const scenarioTask = template.tasks[roleIndex % template.tasks.length];
+      const coordinationTask = scenarioSize.workstreams[roleIndex % scenarioSize.workstreams.length];
+      const vehicleEquipmentNote = roleIndex === 2 && publicVehicleAssets.length
+        ? ` Als Quellhinweis die oben verlinkten Ausstattungslisten dieser ausgewählten Fahrzeuge berücksichtigen: ${publicVehicleAssets.map((asset) => asset.label).join(", ")}. Aktuelle Verfügbarkeit und Eignung vor Ort prüfen.`
+        : "";
+      return {
+        number: roleIndex + 1,
+        title: role.title,
+        task: `${profile.taskLevel ? `${profile.taskLevel} ` : ""}${scenarioTask} ${role.task}${vehicleEquipmentNote}${selectedUnitCount > 1 ? ` ${coordinationTask}` : ""}`,
+        output: role.output,
+        minutes: Math.floor(segments[2] / groupRoles.length) + (rotationIndex < segments[2] % groupRoles.length ? 1 : 0)
+      };
+    });
     return {
       number: index + 1,
       people,
       instructor: (index % Number(data.instructors)) + 1,
-      ...role,
-      task: `${scenarioTask} ${role.task}${selectedUnitCount > 1 ? ` ${coordinationTask}` : ""}`,
-      materials: assignedEquipment
+      title: data.splitGroupsEnabled ? "Rotationsgruppe" : "Gemeinsame Gruppe",
+      task: data.splitGroupsEnabled
+        ? "Bearbeitet alle Aufgabenstationen in der angegebenen Reihenfolge. Die Startstation unterscheidet sich je Gruppe; wechselt innerhalb der Gruppe die Rollen nach jeder Station."
+        : "Bearbeitet alle Aufgabenstationen nacheinander gemeinsam und wechselt die Rollen, damit alle Teilnehmenden jede Aufgabe übernehmen können.",
+      output: "Vollständige Bearbeitung aller Aufgabenstationen mit gemeinsamem Ergebnis und dokumentierten offenen Fragen.",
+      materials: equipment,
+      vehicleEquipmentReferences: publicVehicleAssets.map((asset) => ({
+        label: asset.label,
+        sourceUrl: asset.publishedLoadout.sourceUrl,
+        itemCount: asset.publishedLoadout.items.length
+      })),
+      rotationSteps,
+      audienceNote: profile.guidance || "",
+      equipmentAssignmentIds: []
     };
   });
-  if (groupCount === 1) {
-    groups[0].title = "Gemeinsamer Trupp";
-    groups[0].task = `Bearbeitet nacheinander die Szenarioaufträge: ${template.tasks.join(" ")} Ordnet bestätigte Angaben, Annahmen, offene Fragen und die Materialzuordnung gemeinsam anhand der Szenariokarte; bereitet eine gemeinsame Kurzmeldung für die Nachbesprechung vor.`;
-    groups[0].output = "Ein gemeinsames Lagebild, eine abgestimmte Rollen- und Materialübersicht, dokumentierte Rückfragen und Annahmen sowie ein kurzer Ergebnisbericht für die Nachbesprechung.";
-  }
   const instructorCount = Number(data.instructors);
   const instructorDuties = Array.from({ length: instructorCount }, (_, index) => {
     const duties = [
@@ -738,7 +1191,7 @@ function makePlan(data) {
     },
     unavailable: {
       title: "Übungsmaterial im Planspiel nicht verfügbar",
-      card: "Die Übungsleitung markiert ein eingeplantes Material als im Szenario nicht verfügbar. Nichts wird real entfernt, blockiert oder im Betrieb vorenthalten. Die Gruppe benennt Auswirkungen auf ihren Plan und welche sichere Klärung erforderlich wäre."
+      card: `Die Übungsleitung markiert ausschließlich die ausgewählte Materialposition „${String(data.unavailableMaterial || "").trim()}“ als im Szenario nicht verfügbar. Nichts wird real entfernt, blockiert oder im Betrieb vorenthalten. Die Gruppe benennt Auswirkungen auf ihren Plan und welche sichere Klärung erforderlich wäre.`
     },
     change: {
       title: "Geänderte Rahmenbedingung",
@@ -818,10 +1271,8 @@ function makePlan(data) {
     scenarioInject.card = `Die ursprüngliche Planspiel-Lage bleibt unverändert. Zusätzliche parallele Meldung laut Eingabe der Ausbildungsleitung: „${parallelIncident.details}“ Diese Angabe ausschließlich als separate Planspiel-Textkarte verwenden; keine weiteren Details ergänzen und keine echte Alarmierung, Kommunikation oder Einsatzhandlung auslösen.`;
   }
   const countyVehicles = countyUnits.flatMap((unit) => unit.vehicles);
-  const ownVehicleCrews = { "HLF 10": 9, "HLF 20": 9, "LF 10": 9, "LF 20": 9, TSF: 6, "TSF-W": 6, RW: 3 };
-  const ownVehicleCrew = fireVehicles.reduce((total, type) => total + (ownVehicleCrews[type] || 0), 0);
   const countyCrewEstimate = {
-    knownPersonnel: countyVehicles.reduce((total, vehicle) => total + (vehicle.crew || 0), 0) + ownVehicleCrew,
+    knownPersonnel: countyVehicles.reduce((total, vehicle) => total + (vehicle.crew || 0), 0),
     vehiclesWithoutStaffingData: countyVehicles.filter((vehicle) => !vehicle.crew).map((vehicle) => vehicle.label),
     stationsWithoutVehicleSelection: countyUnits
       .filter((unit) => {
@@ -831,15 +1282,15 @@ function makePlan(data) {
       .map((unit) => unit.name)
   };
   const materialAssignment = equipment.length
-    ? "Die gesamte Gruppe behandelt gemeinsam eine fiktive Szenariokarte. Zusätzlich eingetragene Materialien sind den Gruppen nach Eingabereihenfolge zugeordnet; gemeinsame Nutzung und tatsächliche Eignung legt ausschließlich die Ausbildungsleitung fest."
-    : "Die gesamte Gruppe behandelt gemeinsam eine fiktive Szenariokarte. Keine zusätzlichen Übungsmaterialien eingetragen. Fahrzeugbeladungen werden nicht angenommen; Sondermaterial und lokale Verfügbarkeit bei Bedarf vorab ergänzen und prüfen.";
-
+    ? "Die gesamte Gruppe verwendet dieselbe ergänzende Materialliste als Gesprächsgrundlage. Sie wird nicht praktisch eingesetzt; tatsächliche Verfügbarkeit und Eignung vorab örtlich prüfen."
+    : "Keine zusätzlichen Übungsmaterialien eingetragen. Öffentlich gelistete Fahrzeugausstattung wird pro ausgewähltem Fahrzeug separat ausgewiesen und muss vorab örtlich bestätigt werden.";
   return {
     id, title, createdAt: new Date().toISOString(), templateId: template.id,
     exerciseType: data.exerciseType, exerciseTypeName: format.label,
     objective: data.objective, audience: data.audience, location: data.location,
     scenarioDetails, fireExtent,
-    experienceLevel: data.experienceLevel, participants, groupCount, peoplePerGroup,
+    experienceLevel: data.experienceLevel, audienceGuidance: data.audienceGuidance,
+    splitGroupsEnabled: Boolean(data.splitGroupsEnabled), participants, groupCount, peoplePerGroup,
     instructorCount, duration: total, effort: data.effort, materials: equipment, mustUse: data.mustUse.trim(),
     fireVehicles,
     fireUnitDetails: String(data.fireUnitDetails || "").trim(),
@@ -855,7 +1306,7 @@ function makePlan(data) {
       workstreams: scenarioSize.workstreams,
       additionalInjects: data.injectType === "unchanged" ? [] : scenarioSize.additionalInjects
     },
-    instructorDuties, groups,
+    instructorDuties, groups, equipmentPlan,
     situation: scenarioInfo.situation || `${template.situation}${scenarioDetails ? ` Zusätzliche unbestätigte Planspiel-Angabe: ${scenarioDetails}` : ""}`,
     potentialHazards: scenarioHazardsFor(template.id, scenarioDetails),
     inject: scenarioInject,
@@ -908,16 +1359,16 @@ function listHTML(items) {
 function exercisePacketData(plan) {
   const scenarios = {
     teamkommunikation: {
-      title: "Zeitversetzte Informationen am Übungsobjekt",
-      where: "Fiktives Übungsobjekt A auf einer nicht maßstabsgetreuen Planspielkarte",
-      what: "Zu einem fiktiven Übungsobjekt gehen zwei zeitversetzte Textmeldungen ein.",
-      who: "Eine fiktive meldende Person; Name und Erreichbarkeit sind nicht Teil des Planspiels.",
-      howMany: "1 Übungsobjekt; Zahl betroffener Personen nicht bekannt.",
-      known: "Zwei vorbereitete Textmeldungen; ihr Informationsstand wird auf der Karte gekennzeichnet.",
-      open: "Keine konkrete Gefahr ist bestätigt. Welche Angaben bestätigt sind und welche Informationen fehlen, ist durch die Gruppe zu klären.",
-      factor: "Widersprüchliche oder verspätete Angaben? im Planspiel offen",
+      title: "Funk- und Informationsübung",
+      where: "Kein Einsatzort; ausschließlich am festgelegten Übungsort.",
+      what: "Die Gruppe ordnet vorbereitete, fiktive Text- und Funkmeldungen.",
+      who: "Teilnehmende der Kommunikationsübung; keine reale meldende Person.",
+      howMany: "Keine alarmierten Einheiten oder betroffenen Personen im Szenario.",
+      known: "Nur die vorbereiteten Übungsnachrichten und ihre gekennzeichneten Zeitpunkte.",
+      open: "Es wird kein Einsatzszenario dargestellt. Verständlichkeit, Rückmeldung und offene Informationspunkte sind zu besprechen.",
+      factor: "Verständlichkeit und Informationsabgleich in der Übung",
       theoryQuery: "Kommunikation und Zusammenarbeit Feuerwehr",
-      twist: "Eine zweite Textmeldung nennt einen leicht abweichenden Standort. Die Lageangaben bleiben unbestätigt."
+      twist: "Eine vorbereitete Übungsnachricht ist unvollständig. Die Gruppe kennzeichnet die fehlende Information und stimmt eine Rückfrage ab."
     },
     geraetekunde: {
       title: "Materialübersicht für ein Übungsvorhaben",
@@ -1557,9 +2008,17 @@ function unitPlanningSummary(plan) {
   return entries.join(" ");
 }
 
+function scenarioHasIllustration(plan) {
+  const template = templates.find((item) => item.id === plan.templateId);
+  return !template || template.sceneApplicable !== false;
+}
+
 function renderExercisePacket(plan) {
   const scenario = exercisePacketData(plan);
   const checklist = scenarioChecklist(plan);
+  const hasIllustration = scenarioHasIllustration(plan);
+  const pageCount = hasIllustration ? 3 : 2;
+  const checklistPage = hasIllustration ? 3 : 2;
   const potentialHazards = plan.potentialHazards || scenarioHazardsFor(plan.templateId, plan.scenarioDetails);
   const hazardLegend = '<span><i class="legend-hazard"></i> Einflussfaktor / offene Frage, unbestätigt</span>';
   const fireExtentLegend = {
@@ -1590,16 +2049,8 @@ function renderExercisePacket(plan) {
       </div>
       <p class="parallel-scene-description"><strong>Parallele Meldung (deine Eingabe):</strong> ${escapeHTML(plan.parallelIncident.details)} Nur ausdrücklich genannte und erkannte Bildelemente werden ergänzt; weitere Lagedetails werden nicht erfunden.</p>`
     : exerciseIllustrationSVG(plan, scenario);
-  return `
-    <section id="printable-packet" class="exercise-packet" aria-label="Dreiseitiges Übungs-Alarmfax mit Szenenbild und Checkliste">
-      <article class="packet-page fax-page">
-        <header class="fax-header">
-          <div><p class="eyebrow">Ausbildungsunterlage · Seite 1 von 3</p><h2>Übungs-Alarmfax</h2></div>
-          <span class="exercise-stamp">FIKTIV<br>NICHT VERSENDEN</span>
-        </header>
-        <p class="fax-subtitle">${escapeHTML(scenario.title)}</p>
-        <p><strong>Übungsform:</strong> ${escapeHTML(plan.exerciseTypeName || "Fiktives Planspiel")}</p>
-        <p class="fax-warning">Nur als vorbereitete Planspielkarte verwenden. Keine reale Alarmierung, Notruf- oder Einsatzkommunikation auslösen.</p>
+  const firstPageContent = hasIllustration
+    ? `<p class="fax-warning">Nur als vorbereitete Planspielkarte verwenden. Keine reale Alarmierung, Notruf- oder Einsatzkommunikation auslösen.</p>
         <dl class="fax-fields">
           ${unitsField}
           <div><dt>WO?</dt><dd>${escapeHTML(scenario.where)}</dd></div>
@@ -1619,34 +2070,133 @@ function renderExercisePacket(plan) {
           <p><strong>Übungsort:</strong> ${escapeHTML(plan.location)} (Ort der Ausbildung, keine Einsatzadresse)</p>
           <p><strong>Schwierigkeitsgrad:</strong> ${escapeHTML(plan.effort)} – ${escapeHTML(scenario.difficulty)}</p>
           <p><strong>Durchführung:</strong> Ausschließlich als Textkarte durch die Übungsleitung. ${escapeHTML(plan.inject.title)} als separate, kontrollierte Einspielung verwenden.</p>
-        </div>
-        <p class="packet-safety">Vorher fachlich und örtlich prüfen. Keine echten Gefahren, Fahrzeuge, Personen, Geräteeinsätze, Alarmierungen oder Einsatzkommunikation nachstellen. Örtliche Regeln haben Vorrang.</p>
-      </article>
-      <article class="packet-page sketch-page">
+        </div>`
+    : `<p class="fax-warning">Themenübung ohne Einsatzszenario. Nur als vorbereitete Lernunterlage verwenden; keine realen Funkgeräte, Einsatzkanäle, Alarmierungen oder Einsatzkommunikation nutzen.</p>
+        <dl class="fax-fields">
+          <div><dt>THEMA</dt><dd>${escapeHTML(scenario.title)}</dd></div>
+          <div><dt>LERNZIEL</dt><dd>${escapeHTML(plan.objective)}</dd></div>
+          <div><dt>ÜBUNGSRAHMEN</dt><dd>${escapeHTML(plan.duration)} Minuten · ${escapeHTML(plan.audience)} · ${escapeHTML(plan.experienceLevel)}</dd></div>
+          <div><dt>ÜBUNGSAUFTRAG</dt><dd>${escapeHTML(plan.situation)}</dd></div>
+          <div class="fax-hazard-field"><dt>AUFGABEN FÜR DIE GRUPPE</dt><dd>${listHTML(plan.participantTasks || [])}</dd></div>
+          <div><dt>VORBEREITETE LERNKARTE</dt><dd>${escapeHTML(plan.inject.title)}: ${escapeHTML(plan.inject.card)}</dd></div>
+          <div><dt>ERGÄNZENDES ÜBUNGSMATERIAL</dt><dd>${plan.materials.length ? plan.materials.map(escapeHTML).join(", ") : "Kein zusätzliches Material angegeben."}</dd></div>
+        </dl>
+        <div class="fax-footer-grid">
+          <p><strong>Übungsort:</strong> ${escapeHTML(plan.location)} (Ort der Ausbildung)</p>
+          <p><strong>Schwierigkeitsgrad:</strong> ${escapeHTML(plan.effort)}</p>
+          <p><strong>Durchführung:</strong> Als vorbereitete Themen- und Lernkarten; nichts praktisch nachstellen.</p>
+        </div>`;
+  const illustrationPage = hasIllustration
+    ? `<article class="packet-page sketch-page">
         <header class="fax-header">
-          <div><p class="eyebrow">Ausbildungsunterlage · Seite 2 von 3</p><h2>${plan.parallelIncident ? "Szenenbilder" : "Szenenbild"}</h2></div>
+          <div><p class="eyebrow">Ausbildungsunterlage · Seite 2 von ${pageCount}</p><h2>${plan.parallelIncident ? "Szenenbilder" : "Szenenbild"}</h2></div>
           <span class="exercise-stamp">FIKTIV<br>NICHT VERSENDEN</span>
         </header>
         <p class="fax-subtitle">${escapeHTML(scenario.title)}</p>
         ${parallelScene}
         <div class="sketch-legend"><span><i class="legend-known"></i> bekannte Textangabe</span><span><i class="legend-open"></i> offen / durch Gruppe zu klären</span>${hazardLegend}</div>
         <p class="sketch-caption">${fireExtentLegend ? `${escapeHTML(fireExtentLegend)}. ` : ""}Modular zusammengesetzte Vektorillustration; Fahrzeug-, Personen-, Baum- und Gebäudesymbole stehen in einem gemeinsamen ungefähren Maßstab (20 Bildpunkte ≈ 1 m). Flammen und Gefahrensymbole sind illustrative, nicht maßstäbliche Planspielzeichen; keine bestätigte Ausdehnung, Vermessung oder Handlungsanweisung.</p>
+      </article>`
+    : "";
+  return `
+    <section id="printable-packet" class="exercise-packet" aria-label="${hasIllustration ? "Dreiseitiges Übungs-Alarmfax mit Szenenbild und Checkliste" : "Zweiseitiger Übungsauftrag mit Checkliste"}">
+      <article class="packet-page fax-page">
+        <header class="fax-header">
+          <div><p class="eyebrow">Ausbildungsunterlage · Seite 1 von ${pageCount}</p><h2>${hasIllustration ? "Übungs-Alarmfax" : "Übungsauftrag"}</h2></div>
+          <span class="exercise-stamp">${hasIllustration ? "FIKTIV<br>NICHT VERSENDEN" : "THEMENÜBUNG<br>NUR ÜBUNG"}</span>
+        </header>
+        <p class="fax-subtitle">${escapeHTML(scenario.title)}</p>
+        <p><strong>Übungsform:</strong> ${escapeHTML(plan.exerciseTypeName || "Fiktives Planspiel")}</p>
+        ${firstPageContent}
+        <p class="packet-safety">Vorher fachlich und örtlich prüfen. Keine echten Gefahren, Fahrzeuge, Personen, Geräteeinsätze, Alarmierungen oder Einsatzkommunikation nachstellen. Örtliche Regeln haben Vorrang.</p>
       </article>
+      ${illustrationPage}
       <article class="packet-page checklist-page">
         <header class="fax-header">
-          <div><p class="eyebrow">Ausbildungsunterlage · Seite 3 von 3</p><h2>Chronologische Checkliste für die Einsatzkraft</h2></div>
+          <div><p class="eyebrow">Ausbildungsunterlage · Seite ${checklistPage} von ${pageCount}</p><h2>${hasIllustration ? "Chronologische Checkliste für die Einsatzkraft" : "Checkliste für die Themenübung"}</h2></div>
           <span class="exercise-stamp">FIKTIV<br>NUR ÜBUNG</span>
         </header>
         <p class="fax-subtitle">${escapeHTML(scenario.title)}</p>
-        <p class="checklist-warning"><strong>Perspektive der Einsatzkraft im fiktiven Planspiel.</strong> Die Gruppe bespricht gemeinsam eine Szenariokarte. Die Tabelle ordnet Klärungs- und Kommunikationsaufgaben nach Funktion; sie gibt keine taktische Einsatzreihenfolge oder konkreten Einsatzmaßnahmen vor. Keine echten Einsatzhandlungen nachstellen.</p>
+        <p class="checklist-warning"><strong>${hasIllustration ? "Perspektive der Einsatzkraft im fiktiven Planspiel." : "Gemeinsame Bearbeitung der Themenübung."}</strong> Die Gruppe bearbeitet eine vorbereitete Szenario- beziehungsweise Themenkarte. Die Tabelle ordnet Klärungs- und Kommunikationsaufgaben nach Funktion; sie gibt keine taktische Einsatzreihenfolge oder konkreten Einsatzmaßnahmen vor. Keine echten Einsatzhandlungen nachstellen.</p>
         ${renderChecklistTable(checklist)}
         <section class="checklist-sources">
           <h3>Fachliche Prüfung und Quellen</h3>
-          <p>Die Szenario-Schwerpunkte helfen der Einsatzkraft, die passende Lageinformation und eigene Zuständigkeit zu klären. Sie ersetzen keine praktischen Ausbildungsunterlagen. Die verlinkte Übersicht der Staatlichen Feuerwehrschulen enthält Kontakte; aktuelle szenariobezogene Abläufe und örtliche Verfahren dort beziehungsweise bei der zuständigen Ausbildungsstelle prüfen. Dynamische Treffer auf Gültigkeit prüfen.</p>
+          <p>Die Schwerpunkte helfen, passende Informationen und Zuständigkeiten zu klären. Sie ersetzen keine praktischen Ausbildungsunterlagen. Die verlinkte Übersicht der Staatlichen Feuerwehrschulen enthält Kontakte; aktuelle fachliche Inhalte und örtliche Verfahren dort beziehungsweise bei der zuständigen Ausbildungsstelle prüfen. Dynamische Treffer auf Gültigkeit prüfen.</p>
           <ul>${(plan.theoryResources || []).map((resource) => `<li><a href="${escapeHTML(resource.url)}">${escapeHTML(resource.title)}</a></li>`).join("")}</ul>
         </section>
       </article>
     </section>`;
+}
+
+function equipmentAssignmentConflicts(plan) {
+  const counts = new Map();
+  (plan.groups || []).forEach((group) => {
+    (group.equipmentAssignmentIds || []).forEach((id) => {
+      counts.set(id, (counts.get(id) || 0) + 1);
+    });
+  });
+  const availableInstances = new Map();
+  ((plan.equipmentPlan && plan.equipmentPlan.items) || []).forEach((item) => {
+    item.present.forEach((instance) => availableInstances.set(instance.id, item.name));
+  });
+  return [...counts.entries()]
+    .filter(([id, count]) => count > 1 && availableInstances.has(id))
+    .map(([id]) => availableInstances.get(id));
+}
+
+function renderGroupEquipmentAssignment(plan, group) {
+  const instances = ((plan.equipmentPlan && plan.equipmentPlan.items) || []).flatMap((item) =>
+    item.present.map((instance) => ({ ...instance, name: item.name }))
+  );
+  if (!instances.length) {
+    return `<p class="supporting-note">Keine lokal bestätigten Geräte zur Truppzuordnung vorhanden. Nicht bestätigte Bestände gelten nicht als verfügbar.</p>`;
+  }
+  const assigned = new Set(group.equipmentAssignmentIds || []);
+  return `<fieldset class="group-equipment-assignment">
+    <legend>Örtlich bestätigte Geräte diesem Trupp zuordnen (optional)</legend>
+    <p>Nur vorhandene, vor Ort bestätigte Einträge auswählbar. Das ist keine technische Eignungs- oder Freigabeaussage.</p>
+    <div class="equipment-assignment-options">${instances.map((instance) => `<label><input type="checkbox" data-group-equipment-assignment data-group-number="${escapeHTML(group.number)}" value="${escapeHTML(instance.id)}"${assigned.has(instance.id) ? " checked" : ""}> ${escapeHTML(instance.name)} — ${escapeHTML(instance.vehicleLabel)}${instance.quantityNumber > 1 ? ` · Stück ${escapeHTML(instance.quantityNumber)}` : ""}</label>`).join("")}</div>
+  </fieldset>`;
+}
+
+function renderEquipmentPlanHTML(plan) {
+  if (!["einsatzablauf", "mixed"].includes(plan.exerciseType)) return "";
+  const equipmentPlan = plan.equipmentPlan;
+  if (!equipmentPlan) {
+    return `<section class="plan-section equipment-plan"><h3>Fahrzeug- und Gerätekunde</h3><p>Für diesen älteren gespeicherten Plan liegt kein Fahrzeug-/Inventarsnapshot vor. Fahrzeugbeladung nicht annehmen.</p></section>`;
+  }
+  const itemsHTML = equipmentPlan.items.map((item) => {
+    const category = equipmentCategoryById(item.category);
+    const details = [
+      item.present.length ? `Örtlich bestätigt in: ${item.present.map((instance) => instance.vehicleLabel).join(", ")}` : "",
+      item.listed.length ? `Öffentlich gelistet in: ${item.listed.join(", ")} (aktuelle Verfügbarkeit örtlich prüfen)` : "",
+      item.absent.length ? `Als nicht vorhanden bestätigt in: ${item.absent.join(", ")}` : "",
+      item.unknown.length ? `Unbestätigt in: ${item.unknown.join(", ")}` : ""
+    ].filter(Boolean);
+    const catalogItem = equipmentItemById(item.equipmentId);
+    return `<tr>
+      <th scope="row"><details class="equipment-item-detail"><summary>${escapeHTML(item.name)}</summary>${catalogItem ? equipmentKnowledgeHTML(catalogItem) : ""}</details></th>
+      <td>${escapeHTML(category ? category.name : "Nicht zugeordnet")}</td>
+      <td>${escapeHTML(item.status)}</td>
+      <td>${details.map(escapeHTML).join("<br>") || "Keine lokalen Bestandsangaben."}</td>
+    </tr>`;
+  }).join("");
+  const conflictNames = equipmentAssignmentConflicts(plan);
+  const sourceSummary = equipmentPlan.vehicleAssets.map((asset) =>
+    `${asset.label}${asset.publishedLoadout ? " (öffentliche Einzelliste vorhanden; vor Ort abgleichen)" : " (keine öffentliche Einzelliste hinterlegt)"}`
+  );
+  const publicLoadoutsHTML = equipmentPlan.vehicleAssets.filter((asset) => asset.publishedLoadout).map((asset) =>
+    `<section class="public-loadout"><h4>${escapeHTML(asset.label)} · öffentlich gelistete Ausstattung</h4><ul>${asset.publishedLoadout.items.map((item) => `<li>${escapeHTML(item)}</li>`).join("")}</ul><p><a href="${escapeHTML(asset.publishedLoadout.sourceUrl)}" target="_blank" rel="noopener noreferrer">Quelle: Feuerwehr Aichach</a> · Liste kann unvollständig oder veraltet sein; aktuelle Beladung örtlich bestätigen.</p></section>`
+  ).join("");
+  return `<section class="plan-section equipment-plan">
+    <h3>Szenario- und zielbezogene Materialplanung (unverbindliche Prüfpunkte)</h3>
+    <p>${escapeHTML(equipmentPlan.candidateNote)} Öffentliche Beladungsangaben gelten nur für das bezeichnete Fahrzeug und sind keine aktuelle Bestands- oder Einsatzfreigabe. Für nicht dokumentierte Fahrzeuge keine Ausstattung annehmen. Alle Angaben örtlich prüfen; keine Alternativen oder realen Bedienabläufe ableiten.</p>
+    <h4>Ausgewählte Fahrzeuge</h4>${sourceSummary.length ? listHTML(sourceSummary) : "<p>Keine konkrete Fahrzeugauswahl hinterlegt.</p>"}
+    ${publicLoadoutsHTML}
+    ${itemsHTML ? `<div class="table-scroll"><table class="equipment-plan-table"><thead><tr><th>Gerät</th><th>Kategorie</th><th>Bestandsstatus</th><th>Fahrzeug / Prüfung</th></tr></thead><tbody>${itemsHTML}</tbody></table></div>` : "<p>Kein thematischer Kataloghinweis gefunden. Eine manuelle, örtlich geprüfte Materialplanung bleibt möglich.</p>"}
+    ${conflictNames.length ? `<p class="equipment-conflict" role="alert"><strong>Mögliche Zuordnungskollision:</strong> ${escapeHTML([...new Set(conflictNames)].join(", "))} wurde mehr als einem Trupp zugeteilt. Verfügbarkeit und Zeitüberschneidung durch die Ausbildungsleitung klären.</p>` : ""}
+    <p class="supporting-note">Nur lokal als vorhanden bestätigte Geräte können den Trupps optional zugeordnet werden. Eine Zuordnung durch mehrere Trupps wird als mögliche Kollision angezeigt; keine Einsatzfreigabe.</p>
+  </section>`;
 }
 
 function scenarioChecklist(plan) {
@@ -1755,11 +2305,18 @@ function renderTheoryScript(plan) {
   const scenario = exercisePacketData(plan);
   const checklist = scenarioChecklist(plan);
   const potentialHazards = plan.potentialHazards || scenarioHazardsFor(plan.templateId, plan.scenarioDetails);
-  const contentPoints = [
-    `Meldungsinhalt: ${scenario.what}`,
-    `Als bekannt ausgewiesen: ${scenario.known}`,
-    `Als offen ausgewiesen: ${scenario.open}`
-  ];
+  const hasIllustration = scenarioHasIllustration(plan);
+  const contentPoints = hasIllustration
+    ? [
+      `Meldungsinhalt: ${scenario.what}`,
+      `Als bekannt ausgewiesen: ${scenario.known}`,
+      `Als offen ausgewiesen: ${scenario.open}`
+    ]
+    : [
+      `Thema: ${scenario.title}`,
+      `Lernziel: ${plan.objective}`,
+      `Übungsrahmen: ${plan.audience}; ${plan.duration} Minuten; ${plan.experienceLevel}`
+    ];
   return `
     <section id="printable-theory" class="theory-sheet" aria-label="Theorie-Skript">
         <header class="theory-header">
@@ -1767,28 +2324,28 @@ function renderTheoryScript(plan) {
           <h2>${escapeHTML(scenario.title)}</h2>
           <p>${escapeHTML(plan.exerciseTypeName)} · ${escapeHTML(plan.duration)} Minuten · ${escapeHTML(plan.audience)}</p>
         </header>
-        <div class="theory-validation"><strong>Fachlicher Rahmen:</strong> Dieses Skript ordnet das Lernziel, die fiktive Szenariomeldung und die vorhandenen Lernaufträge. Es ist keine amtliche FwDV-Wiedergabe und enthält keine verbindlichen Einsatzverfahren. Vor Verwendung die aktuell in Bayern geltenden Feuerwehr-Dienstvorschriften, landesrechtlichen Regelungen und örtlichen Vorgaben durch die verantwortliche Ausbildungsleitung prüfen.</div>
+        <div class="theory-validation"><strong>Fachlicher Rahmen:</strong> Dieses Skript ordnet das Lernziel, ${hasIllustration ? "die fiktive Szenariomeldung" : "das gewählte Übungsthema"} und die vorhandenen Lernaufträge. Es ist keine amtliche FwDV-Wiedergabe und enthält keine verbindlichen Einsatzverfahren. Vor Verwendung die aktuell in Bayern geltenden Feuerwehr-Dienstvorschriften, landesrechtlichen Regelungen und örtlichen Vorgaben durch die verantwortliche Ausbildungsleitung prüfen.</div>
         <section class="theory-section">
           <h3>Lernziel</h3>
           <p>${escapeHTML(plan.objective)}</p>
         </section>
         <section class="theory-section">
-          <h3>Skript-Stichpunkte: Szenario und Informationslage</h3>
+          <h3>Skript-Stichpunkte: ${hasIllustration ? "Szenario und Informationslage" : "Thema und Lernrahmen"}</h3>
           ${listHTML(contentPoints)}
-          <p>Alle Angaben sind fiktive Lernimpulse. Unbestätigte Hinweise nicht als Tatsachen oder als technische Einsatzbewertung übernehmen.</p>
+          <p>${hasIllustration ? "Alle Angaben sind fiktive Lernimpulse. Unbestätigte Hinweise nicht als Tatsachen oder als technische Einsatzbewertung übernehmen." : "Die Aufgaben dienen der theoretischen Abstimmung; es wird kein Einsatzszenario dargestellt."}</p>
         </section>
         <section class="theory-section">
-          <h3>Mögliche Gefahren und Einflussfaktoren (nicht abschließend)</h3>
-          <p>Nur unbestätigte Prüfungspunkte, keine Gefahrenfeststellung und keine Maßnahmenanweisung. Tatsächliche Gefahren und Vorgehen durch zuständige Fachkräfte anhand der aktuellen Lage, Ausbildung und örtlichen Vorgaben bewerten.</p>
+          <h3>${hasIllustration ? "Mögliche Gefahren und Einflussfaktoren (nicht abschließend)" : "Sicherheits- und Prüfhinweise"}</h3>
+          <p>${hasIllustration ? "Nur unbestätigte Prüfungspunkte, keine Gefahrenfeststellung und keine Maßnahmenanweisung. Tatsächliche Gefahren und Vorgehen durch zuständige Fachkräfte anhand der aktuellen Lage, Ausbildung und örtlichen Vorgaben bewerten." : "Keine praktischen Einsatzhandlungen, echten Funkgeräte oder Einsatzkanäle verwenden. Aufgaben und Materialien vorab durch die verantwortliche Ausbildungsleitung prüfen."}</p>
           ${listHTML(potentialHazards)}
         </section>
         <section class="theory-section">
-          <h3>Szenariobezogene Lernaufträge</h3>
+          <h3>${hasIllustration ? "Szenariobezogene Lernaufträge" : "Themenbezogene Lernaufträge"}</h3>
           ${listHTML(plan.participantTasks || [])}
         </section>
         <section class="theory-section">
-          <h3>Chronologische Checkliste für die Einsatzkraft</h3>
-          <p>Perspektive und Klärungspunkte für die fiktive Übung. Konkrete taktische Maßnahmen und Reihenfolgen sind nicht vorgegeben.</p>
+          <h3>${hasIllustration ? "Chronologische Checkliste für die Einsatzkraft" : "Rollen-Checkliste für die Themenübung"}</h3>
+          <p>${hasIllustration ? "Perspektive und Klärungspunkte für die fiktive Übung. Konkrete taktische Maßnahmen und Reihenfolgen sind nicht vorgegeben." : "Rollenbezogene Kommunikations- und Abstimmungspunkte. Es wird kein Einsatzszenario abgebildet."}</p>
           ${renderChecklistTable(checklist)}
         </section>
         <section class="theory-section">
@@ -1815,11 +2372,15 @@ function renderPlan(plan) {
   ).join("");
   const groupsHTML = (plan.groups || []).map((group) => `
     <article class="group-card">
-      <h4>Trupp ${escapeHTML(group.number)} · ${escapeHTML(group.title)}</h4>
+      <h4>Gruppe ${escapeHTML(group.number)} · ${escapeHTML(group.title)}</h4>
       <p class="group-meta">${escapeHTML(group.people)} Teilnehmende · Beobachtung durch Ausbilder/in ${escapeHTML(group.instructor)}</p>
       <p><strong>Auftrag:</strong> ${escapeHTML(group.task)}</p>
+      ${group.audienceNote ? `<p class="supporting-note">${escapeHTML(group.audienceNote)}</p>` : ""}
       <p><strong>Ergebnis:</strong> ${escapeHTML(group.output)}</p>
       <p><strong>Material:</strong> ${group.materials.length ? group.materials.map(escapeHTML).join(", ") : "Kein Einzelmaterial zugeteilt; Ausgabe oder gemeinsame Nutzung vorab durch die Ausbildungsleitung festlegen."}</p>
+      ${group.vehicleEquipmentReferences && group.vehicleEquipmentReferences.length ? `<p><strong>Fahrzeugmaterial als gemeinsame Prüfgrundlage:</strong> ${group.vehicleEquipmentReferences.map((reference) => `<a href="${escapeHTML(reference.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(reference.label)}</a> (${escapeHTML(reference.itemCount)} öffentlich gelistete Positionen)`).join("; ")}. Vollständige Listen stehen oben im Plan; örtliche Verfügbarkeit und Eignung vorab prüfen.</p>` : ""}
+      ${group.rotationSteps && group.rotationSteps.length ? `<h5>Aufgabenstationen in Reihenfolge</h5><ol class="group-rotation-list">${group.rotationSteps.map((step) => `<li><strong>${escapeHTML(step.title)} · ${escapeHTML(step.minutes)} Min.</strong><br>${escapeHTML(step.task)}<br><span class="supporting-note">Ergebnis: ${escapeHTML(step.output)}</span></li>`).join("")}</ol>` : ""}
+      ${["einsatzablauf", "mixed"].includes(plan.exerciseType) ? renderGroupEquipmentAssignment(plan, group) : ""}
     </article>`).join("");
   const wishesHTML = plan.wishes
     ? `<section class="plan-section"><h3>Besondere Wünsche und Ergänzungen</h3><p>${escapeHTML(plan.wishes)}</p></section>`
@@ -1842,6 +2403,7 @@ function renderPlan(plan) {
   const unitPlanningHTML = ["einsatzablauf", "mixed"].includes(plan.exerciseType)
     ? `<section class="plan-section"><h3>Fiktiv beteiligte Einheiten – keine echte Alarmierung</h3><p>${escapeHTML(unitPlanningSummary(plan))}</p><p>Die hinterlegte Liste ist unvollständig. Besatzungsangaben sind nur rechnerische Richtwerte bei Vollbesetzung; tatsächliche Besatzung und Übungsteilnehmerzahl örtlich prüfen. Fahrzeugklasse ist keine Normbeladungsgarantie. Bestückung, Personalstärke und örtlich zugeteilte Rufnamen vor Verwendung bestätigen.</p></section>`
     : "";
+  const equipmentPlanHTML = renderEquipmentPlanHTML(plan);
   const scenarioSizeHTML = ["einsatzablauf", "mixed"].includes(plan.exerciseType) && plan.scenarioSize && plan.scenarioSize.unitCount > 0
     ? `<section class="plan-section scenario-scale"><h3>Szenariogröße und Koordination: ${escapeHTML(plan.scenarioSize.label)}</h3><p>${escapeHTML(plan.scenarioSize.briefing)}</p><p><strong>Im Planspiel eingeplante Einheiten/Fahrzeuggruppen:</strong> ${escapeHTML(plan.scenarioSize.unitCount)}</p>${listHTML(plan.scenarioSize.workstreams)}</section>`
     : "";
@@ -1861,8 +2423,9 @@ function renderPlan(plan) {
       <section class="plan-section"><h3>Ausbildungsziel</h3><p>${escapeHTML(plan.objective)}</p></section>
       <section class="plan-section"><h3>Übungsform</h3><p><strong>${escapeHTML(plan.exerciseTypeName || "Fiktives Planspiel")}</strong> · Das ausgewählte Szenario wird ausschließlich in der beschriebenen Theorie- oder Planspielform bearbeitet.</p>${theoryResourcesHTML}</section>
       ${unitPlanningHTML}
+      ${equipmentPlanHTML}
       ${scenarioSizeHTML}
-      <section class="plan-section"><h3>Zielgruppe und Gruppeneinteilung</h3><p>${escapeHTML(plan.audience)} · angenommener Ausbildungsstand: ${escapeHTML(plan.experienceLevel || "bei älterem gespeicherten Plan nicht angegeben; vorab festlegen")}.</p><p>${escapeHTML(plan.participants)} Teilnehmende in ${escapeHTML(plan.groupCount || "nicht eingeteilte")} Trupp(s): ${(plan.peoplePerGroup || []).map((count, index) => `Trupp ${index + 1}: ${count} Person(en)`).map(escapeHTML).join(" · ") || "Gruppeneinteilung vor der Übung festlegen."}</p></section>
+      <section class="plan-section"><h3>Zielgruppe und Gruppeneinteilung</h3><p>${escapeHTML(plan.audience)} · Ausbildungsniveau: ${escapeHTML(plan.experienceLevel || "bei älterem gespeicherten Plan nicht angegeben; vorab festlegen")}.</p><p>${escapeHTML(plan.audienceGuidance || "Zielgruppenangemessene Aufgaben vorab durch die Ausbildungsleitung festlegen.")}</p><p>${escapeHTML(plan.participants)} Teilnehmende in ${(plan.splitGroupsEnabled ? `${escapeHTML(plan.groupCount)} rotierenden Gruppen` : "einer gemeinsamen Gruppe")}: ${(plan.peoplePerGroup || []).map((count, index) => `Gruppe ${index + 1}: ${count} Person(en)`).map(escapeHTML).join(" · ") || "Gruppeneinteilung vor der Übung festlegen."}</p>${plan.splitGroupsEnabled ? "<p>Jede Gruppe bearbeitet alle Aufgabenstationen; die Startstationen sind versetzt. Innerhalb der Gruppe nach jeder Station die Rollen wechseln.</p>" : ""}</section>
       <section class="plan-section"><h3>Ausgangslage</h3><p>${escapeHTML(plan.situation)}</p><p>Die beschriebene Situation bleibt fiktiv und wird ausschließlich am Tisch oder als mündliches Planspiel besprochen.</p></section>
       <section class="plan-section hazard-review"><h3>Mögliche Gefahren und Einflussfaktoren</h3><p>Diese szenariobezogene Liste ist nicht vollständig; die Punkte sind keine bestätigten Feststellungen. Konkrete Gefahren können abweichen. Sie gibt keine Maßnahmen vor – maßgeblich sind aktuelle Ausbildung, zuständige Führung und örtliche Vorgaben.</p>${listHTML(potentialHazards)}</section>
       <section class="plan-section"><h3>Gesamtmaterial und Zuordnung</h3>${listHTML(plan.materials)}<p>${escapeHTML(plan.materialAssignment || "Materialzuordnung eines älteren Plans vorab durch die Ausbildungsleitung prüfen und festlegen.")}</p>${plan.mustUse ? `<p><strong>Zusätzlich zwingend berücksichtigen:</strong> ${escapeHTML(plan.mustUse)}</p>` : ""}</section>
@@ -1879,7 +2442,7 @@ function renderPlan(plan) {
       ${wishesHTML}
       <div class="plan-actions no-print">
         <button class="button button-primary" type="button" id="favorite-button">Als Favorit speichern</button>
-        <button class="button button-secondary" type="button" id="packet-print-button">Alarmfax, Szenenbild und Checkliste als PDF speichern</button>
+        <button class="button button-secondary" type="button" id="packet-print-button">${scenarioHasIllustration(plan) ? "Alarmfax, Szenenbild und Checkliste als PDF speichern" : "Übungsauftrag und Checkliste als PDF speichern"}</button>
         ${showTheoryResources ? `<button class="button button-secondary" type="button" id="theory-print-button">Theorie-Skript drucken / als PDF speichern</button>` : ""}
         <button class="button button-secondary" type="button" id="print-button">Drucken</button>
         <button class="button button-secondary" type="button" id="new-plan-button">Neue Übung planen</button>
@@ -1900,6 +2463,19 @@ function renderPlan(plan) {
         <p class="status-message" id="rating-status" aria-live="polite"></p>
       </section>
     </article>`;
+  planOutput.querySelectorAll("[data-group-equipment-assignment]").forEach((input) => {
+    input.addEventListener("change", () => {
+      const group = (plan.groups || []).find((item) => item.number === Number(input.dataset.groupNumber));
+      if (!group) return;
+      const selected = new Set(group.equipmentAssignmentIds || []);
+      if (input.checked) selected.add(input.value);
+      else selected.delete(input.value);
+      group.equipmentAssignmentIds = [...selected];
+      renderPlan(plan);
+      const selector = `[data-group-equipment-assignment][data-group-number="${CSS.escape(String(group.number))}"][value="${CSS.escape(input.value)}"]`;
+      planOutput.querySelector(selector)?.focus();
+    });
+  });
   bindPlanButtons(plan);
 }
 
@@ -2052,6 +2628,7 @@ function showView(name) {
     else button.removeAttribute("aria-current");
   });
   if (name === "gespeichert") renderFavorites();
+  if (name === "geraetekunde") renderEquipmentLibrary(document.querySelector("#equipment-library-filter").value);
 }
 
 document.querySelectorAll(".nav-link").forEach((button) => {
@@ -2061,26 +2638,44 @@ document.querySelectorAll(".nav-link").forEach((button) => {
 form.querySelectorAll("input, textarea, select").forEach((field) => {
   field.addEventListener("input", () => {
     if (field.hasAttribute("aria-invalid")) showFieldError(field);
-    if (field.name === "fireVehicle") updateParticipantEstimate();
     if (field.name === "participants") delete field.dataset.autoEstimate;
+    if (field.name === "materials") updateUnavailableMaterialFields();
+    if (field.name === "objective") renderSelectedEquipmentOverview();
   });
   field.addEventListener("change", () => {
     if (field.hasAttribute("aria-invalid")) showFieldError(field);
-    if (field.name === "fireVehicle") updateParticipantEstimate();
     if (field.name === "participants") delete field.dataset.autoEstimate;
+    if (field.name === "materials") updateUnavailableMaterialFields();
+    if (field.name === "objective") renderSelectedEquipmentOverview();
+    if (field.name === "audience") updateAudienceLevel();
   });
 });
 
 form.elements.exerciseType.addEventListener("change", updateUnitPlanningVisibility);
-form.elements.scenarioId.addEventListener("change", updateFireExtentVisibility);
-form.elements.injectType.addEventListener("change", updateParallelIncidentFields);
+form.elements.splitGroups.addEventListener("change", updateGroupSplitFields);
+form.elements.scenarioId.addEventListener("change", () => {
+  updateFireExtentVisibility();
+  renderSelectedEquipmentOverview();
+});
+form.elements.injectType.addEventListener("change", () => {
+  updateParallelIncidentFields();
+  updateUnavailableMaterialFields();
+});
 form.elements.parallelIncidentEnabled.addEventListener("change", updateParallelIncidentFields);
 updateParallelIncidentFields();
+updateUnavailableMaterialFields();
 updateFireExtentVisibility();
+updateAudienceLevel();
+updateGroupSplitFields();
 form.querySelectorAll('input[name="countyStation"]').forEach((input) => {
   input.addEventListener("change", renderCountyUnitVehicleSelections);
 });
-document.querySelector("#county-unit-vehicle-selections").addEventListener("change", updateParticipantEstimate);
+document.querySelector("#county-unit-vehicle-selections").addEventListener("change", () => {
+  renderCountyUnitVehicleSelections();
+});
+document.querySelector("#equipment-library-filter").addEventListener("input", (event) => {
+  renderEquipmentLibrary(event.target.value);
+});
 
 document.querySelector("#next-button").addEventListener("click", () => {
   if (validateStep(currentStep)) {
@@ -2116,3 +2711,4 @@ renderCountyUnitVehicleSelections();
 updateParticipantEstimate();
 setStep(0);
 renderFavorites();
+renderEquipmentLibrary();
